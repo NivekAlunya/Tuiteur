@@ -1,0 +1,569 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D142EEE11CA4933E007E2900 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D142EEE01CA4933E007E2900 /* AppDelegate.swift */; };
+		D142EEE31CA4933E007E2900 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D142EEE21CA4933E007E2900 /* ViewController.swift */; };
+		D142EEE61CA4933E007E2900 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D142EEE41CA4933E007E2900 /* Main.storyboard */; };
+		D142EEE91CA4933E007E2900 /* Tuiteur.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D142EEE71CA4933E007E2900 /* Tuiteur.xcdatamodeld */; };
+		D142EEEB1CA4933E007E2900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D142EEEA1CA4933E007E2900 /* Assets.xcassets */; };
+		D142EEEE1CA4933E007E2900 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D142EEEC1CA4933E007E2900 /* LaunchScreen.storyboard */; };
+		D142EEF91CA4933E007E2900 /* TuiteurTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D142EEF81CA4933E007E2900 /* TuiteurTests.swift */; };
+		D142EF041CA4933E007E2900 /* TuiteurUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D142EF031CA4933E007E2900 /* TuiteurUITests.swift */; };
+		D142EF151CA578C1007E2900 /* TwitterConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D142EF141CA578C1007E2900 /* TwitterConnection.swift */; };
+		D142EF171CA5DE0F007E2900 /* API in Resources */ = {isa = PBXBuildFile; fileRef = D142EF161CA5DE0F007E2900 /* API */; };
+		D142EF191CA600FB007E2900 /* UIPickerViewDataSourceAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D142EF181CA600FB007E2900 /* UIPickerViewDataSourceAccounts.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D142EEF51CA4933E007E2900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D142EED51CA4933D007E2900 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D142EEDC1CA4933D007E2900;
+			remoteInfo = Tuiteur;
+		};
+		D142EF001CA4933E007E2900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D142EED51CA4933D007E2900 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D142EEDC1CA4933D007E2900;
+			remoteInfo = Tuiteur;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D142EEDD1CA4933D007E2900 /* Tuiteur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tuiteur.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D142EEE01CA4933E007E2900 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D142EEE21CA4933E007E2900 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D142EEE51CA4933E007E2900 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D142EEE81CA4933E007E2900 /* Tuiteur.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tuiteur.xcdatamodel; sourceTree = "<group>"; };
+		D142EEEA1CA4933E007E2900 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D142EEED1CA4933E007E2900 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D142EEEF1CA4933E007E2900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D142EEF41CA4933E007E2900 /* TuiteurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TuiteurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D142EEF81CA4933E007E2900 /* TuiteurTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuiteurTests.swift; sourceTree = "<group>"; };
+		D142EEFA1CA4933E007E2900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D142EEFF1CA4933E007E2900 /* TuiteurUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TuiteurUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D142EF031CA4933E007E2900 /* TuiteurUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuiteurUITests.swift; sourceTree = "<group>"; };
+		D142EF051CA4933E007E2900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D142EF141CA578C1007E2900 /* TwitterConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterConnection.swift; sourceTree = "<group>"; };
+		D142EF161CA5DE0F007E2900 /* API */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = API; sourceTree = "<group>"; };
+		D142EF181CA600FB007E2900 /* UIPickerViewDataSourceAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPickerViewDataSourceAccounts.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D142EEDA1CA4933D007E2900 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D142EEF11CA4933E007E2900 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D142EEFC1CA4933E007E2900 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D142EED41CA4933D007E2900 = {
+			isa = PBXGroup;
+			children = (
+				D142EEDF1CA4933E007E2900 /* Tuiteur */,
+				D142EEF71CA4933E007E2900 /* TuiteurTests */,
+				D142EF021CA4933E007E2900 /* TuiteurUITests */,
+				D142EEDE1CA4933D007E2900 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D142EEDE1CA4933D007E2900 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D142EEDD1CA4933D007E2900 /* Tuiteur.app */,
+				D142EEF41CA4933E007E2900 /* TuiteurTests.xctest */,
+				D142EEFF1CA4933E007E2900 /* TuiteurUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D142EEDF1CA4933E007E2900 /* Tuiteur */ = {
+			isa = PBXGroup;
+			children = (
+				D142EF131CA576A2007E2900 /* Views */,
+				D142EF121CA57695007E2900 /* Store */,
+				D142EF111CA5767E007E2900 /* Model */,
+				D142EEE01CA4933E007E2900 /* AppDelegate.swift */,
+				D142EEE41CA4933E007E2900 /* Main.storyboard */,
+				D142EEEA1CA4933E007E2900 /* Assets.xcassets */,
+				D142EEEC1CA4933E007E2900 /* LaunchScreen.storyboard */,
+				D142EEEF1CA4933E007E2900 /* Info.plist */,
+				D142EEE71CA4933E007E2900 /* Tuiteur.xcdatamodeld */,
+				D142EF161CA5DE0F007E2900 /* API */,
+			);
+			path = Tuiteur;
+			sourceTree = "<group>";
+		};
+		D142EEF71CA4933E007E2900 /* TuiteurTests */ = {
+			isa = PBXGroup;
+			children = (
+				D142EEF81CA4933E007E2900 /* TuiteurTests.swift */,
+				D142EEFA1CA4933E007E2900 /* Info.plist */,
+			);
+			path = TuiteurTests;
+			sourceTree = "<group>";
+		};
+		D142EF021CA4933E007E2900 /* TuiteurUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D142EF031CA4933E007E2900 /* TuiteurUITests.swift */,
+				D142EF051CA4933E007E2900 /* Info.plist */,
+			);
+			path = TuiteurUITests;
+			sourceTree = "<group>";
+		};
+		D142EF111CA5767E007E2900 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D142EF181CA600FB007E2900 /* UIPickerViewDataSourceAccounts.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D142EF121CA57695007E2900 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				D142EF141CA578C1007E2900 /* TwitterConnection.swift */,
+			);
+			name = Store;
+			sourceTree = "<group>";
+		};
+		D142EF131CA576A2007E2900 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D142EEE21CA4933E007E2900 /* ViewController.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D142EEDC1CA4933D007E2900 /* Tuiteur */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D142EF081CA4933E007E2900 /* Build configuration list for PBXNativeTarget "Tuiteur" */;
+			buildPhases = (
+				D142EED91CA4933D007E2900 /* Sources */,
+				D142EEDA1CA4933D007E2900 /* Frameworks */,
+				D142EEDB1CA4933D007E2900 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tuiteur;
+			productName = Tuiteur;
+			productReference = D142EEDD1CA4933D007E2900 /* Tuiteur.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D142EEF31CA4933E007E2900 /* TuiteurTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D142EF0B1CA4933E007E2900 /* Build configuration list for PBXNativeTarget "TuiteurTests" */;
+			buildPhases = (
+				D142EEF01CA4933E007E2900 /* Sources */,
+				D142EEF11CA4933E007E2900 /* Frameworks */,
+				D142EEF21CA4933E007E2900 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D142EEF61CA4933E007E2900 /* PBXTargetDependency */,
+			);
+			name = TuiteurTests;
+			productName = TuiteurTests;
+			productReference = D142EEF41CA4933E007E2900 /* TuiteurTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D142EEFE1CA4933E007E2900 /* TuiteurUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D142EF0E1CA4933E007E2900 /* Build configuration list for PBXNativeTarget "TuiteurUITests" */;
+			buildPhases = (
+				D142EEFB1CA4933E007E2900 /* Sources */,
+				D142EEFC1CA4933E007E2900 /* Frameworks */,
+				D142EEFD1CA4933E007E2900 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D142EF011CA4933E007E2900 /* PBXTargetDependency */,
+			);
+			name = TuiteurUITests;
+			productName = TuiteurUITests;
+			productReference = D142EEFF1CA4933E007E2900 /* TuiteurUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D142EED51CA4933D007E2900 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Kevin Launay";
+				TargetAttributes = {
+					D142EEDC1CA4933D007E2900 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 92R2MUGYT2;
+					};
+					D142EEF31CA4933E007E2900 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 92R2MUGYT2;
+						TestTargetID = D142EEDC1CA4933D007E2900;
+					};
+					D142EEFE1CA4933E007E2900 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 92R2MUGYT2;
+						TestTargetID = D142EEDC1CA4933D007E2900;
+					};
+				};
+			};
+			buildConfigurationList = D142EED81CA4933D007E2900 /* Build configuration list for PBXProject "Tuiteur" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D142EED41CA4933D007E2900;
+			productRefGroup = D142EEDE1CA4933D007E2900 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D142EEDC1CA4933D007E2900 /* Tuiteur */,
+				D142EEF31CA4933E007E2900 /* TuiteurTests */,
+				D142EEFE1CA4933E007E2900 /* TuiteurUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D142EEDB1CA4933D007E2900 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D142EEEE1CA4933E007E2900 /* LaunchScreen.storyboard in Resources */,
+				D142EF171CA5DE0F007E2900 /* API in Resources */,
+				D142EEEB1CA4933E007E2900 /* Assets.xcassets in Resources */,
+				D142EEE61CA4933E007E2900 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D142EEF21CA4933E007E2900 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D142EEFD1CA4933E007E2900 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D142EED91CA4933D007E2900 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D142EEE31CA4933E007E2900 /* ViewController.swift in Sources */,
+				D142EEE11CA4933E007E2900 /* AppDelegate.swift in Sources */,
+				D142EF191CA600FB007E2900 /* UIPickerViewDataSourceAccounts.swift in Sources */,
+				D142EF151CA578C1007E2900 /* TwitterConnection.swift in Sources */,
+				D142EEE91CA4933E007E2900 /* Tuiteur.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D142EEF01CA4933E007E2900 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D142EEF91CA4933E007E2900 /* TuiteurTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D142EEFB1CA4933E007E2900 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D142EF041CA4933E007E2900 /* TuiteurUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D142EEF61CA4933E007E2900 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D142EEDC1CA4933D007E2900 /* Tuiteur */;
+			targetProxy = D142EEF51CA4933E007E2900 /* PBXContainerItemProxy */;
+		};
+		D142EF011CA4933E007E2900 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D142EEDC1CA4933D007E2900 /* Tuiteur */;
+			targetProxy = D142EF001CA4933E007E2900 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D142EEE41CA4933E007E2900 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D142EEE51CA4933E007E2900 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D142EEEC1CA4933E007E2900 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D142EEED1CA4933E007E2900 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D142EF061CA4933E007E2900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D142EF071CA4933E007E2900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D142EF091CA4933E007E2900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Tuiteur/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rugastelo.Tuiteur;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		D142EF0A1CA4933E007E2900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Tuiteur/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rugastelo.Tuiteur;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		D142EF0C1CA4933E007E2900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = TuiteurTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rugastelo.TuiteurTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tuiteur.app/Tuiteur";
+			};
+			name = Debug;
+		};
+		D142EF0D1CA4933E007E2900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = TuiteurTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rugastelo.TuiteurTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tuiteur.app/Tuiteur";
+			};
+			name = Release;
+		};
+		D142EF0F1CA4933E007E2900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TuiteurUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rugastelo.TuiteurUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Tuiteur;
+			};
+			name = Debug;
+		};
+		D142EF101CA4933E007E2900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = TuiteurUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rugastelo.TuiteurUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Tuiteur;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D142EED81CA4933D007E2900 /* Build configuration list for PBXProject "Tuiteur" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D142EF061CA4933E007E2900 /* Debug */,
+				D142EF071CA4933E007E2900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D142EF081CA4933E007E2900 /* Build configuration list for PBXNativeTarget "Tuiteur" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D142EF091CA4933E007E2900 /* Debug */,
+				D142EF0A1CA4933E007E2900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D142EF0B1CA4933E007E2900 /* Build configuration list for PBXNativeTarget "TuiteurTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D142EF0C1CA4933E007E2900 /* Debug */,
+				D142EF0D1CA4933E007E2900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D142EF0E1CA4933E007E2900 /* Build configuration list for PBXNativeTarget "TuiteurUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D142EF0F1CA4933E007E2900 /* Debug */,
+				D142EF101CA4933E007E2900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D142EEE71CA4933E007E2900 /* Tuiteur.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D142EEE81CA4933E007E2900 /* Tuiteur.xcdatamodel */,
+			);
+			currentVersion = D142EEE81CA4933E007E2900 /* Tuiteur.xcdatamodel */;
+			path = Tuiteur.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = D142EED51CA4933D007E2900 /* Project object */;
+}
