@@ -10,11 +10,6 @@ import UIKit
 import Accounts
 
 class UIPickerViewDataSourceAccounts: NSObject, UIPickerViewDataSource {
-//    let accounts: [ACAccount]
-//    
-//    init(accounts: [ACAccount]) {
-//        self.accounts = accounts
-//    }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1

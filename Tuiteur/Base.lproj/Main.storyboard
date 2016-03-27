@@ -19,8 +19,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYD-hd-T9z">
-                                <rect key="frame" x="20" y="24" width="560" height="34"/>
+                                <rect key="frame" x="20" y="24" width="560" height="40"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="izO-ol-Rkh"/>
+                                </constraints>
                                 <state key="normal" title="Request account">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -29,27 +32,35 @@
                                     <action selector="btnRequestAccount:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YKh-ja-HPd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QI6-OD-SrR">
-                                <rect key="frame" x="20" y="99" width="166" height="34"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QI6-OD-SrR">
+                                <rect key="frame" x="20" y="110" width="200" height="34"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Request account">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="sgr-4i-Xuk"/>
+                                </constraints>
+                                <state key="normal" title="Request information">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnRequestAccount:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FFw-Fo-hx9"/>
+                                    <action selector="btnRequestAccountInformation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GOp-mz-uEE"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select an account" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="huU-Zu-tqa">
-                                <rect key="frame" x="20" y="66" width="560" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select an account" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="huU-Zu-tqa">
+                                <rect key="frame" x="20" y="72" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="huU-Zu-tqa" firstAttribute="leading" secondItem="mYD-hd-T9z" secondAttribute="leading" id="47W-yQ-26h"/>
+                            <constraint firstItem="huU-Zu-tqa" firstAttribute="trailing" secondItem="mYD-hd-T9z" secondAttribute="trailing" id="JNj-Wa-kny"/>
+                            <constraint firstItem="huU-Zu-tqa" firstAttribute="top" secondItem="mYD-hd-T9z" secondAttribute="bottom" constant="8" symbolic="YES" id="NcR-eB-1g7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mYD-hd-T9z" secondAttribute="trailing" id="Pl8-1e-zNT"/>
                             <constraint firstItem="mYD-hd-T9z" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="4" id="QNS-9r-tAO"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="QI6-OD-SrR" secondAttribute="leading" id="aze-T4-ZRa"/>
+                            <constraint firstItem="QI6-OD-SrR" firstAttribute="top" secondItem="huU-Zu-tqa" secondAttribute="bottom" constant="8" id="bQH-oL-ROU"/>
                             <constraint firstItem="mYD-hd-T9z" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="cUp-4y-cVa"/>
                         </constraints>
                     </view>
@@ -59,7 +70,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="325" y="328"/>
+            <point key="canvasLocation" x="-868" y="99"/>
         </scene>
     </scenes>
 </document>
