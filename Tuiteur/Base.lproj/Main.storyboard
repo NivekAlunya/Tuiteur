@@ -25,8 +25,8 @@
                                     <constraint firstAttribute="height" constant="40" id="izO-ol-Rkh"/>
                                 </constraints>
                                 <state key="normal" title="Request account">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="btnRequestAccount:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YKh-ja-HPd"/>
@@ -38,12 +38,12 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="sgr-4i-Xuk"/>
                                 </constraints>
-                                <state key="normal" title="Request information">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <state key="normal" title="Request Friends">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnRequestAccountInformation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GOp-mz-uEE"/>
+                                    <action selector="btnRequestAccountFriends:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3JH-0T-UiA"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select an account" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="huU-Zu-tqa">
@@ -51,11 +51,28 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qMx-Uu-c9x">
+                                <rect key="frame" x="228" y="110" width="200" height="34"/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="DP7-qD-By5"/>
+                                </constraints>
+                                <state key="normal" title="Request Timeline">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnRequestAccountTimeline:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WRv-yU-t1K"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="huU-Zu-tqa" firstAttribute="leading" secondItem="mYD-hd-T9z" secondAttribute="leading" id="47W-yQ-26h"/>
+                            <constraint firstItem="qMx-Uu-c9x" firstAttribute="baseline" secondItem="QI6-OD-SrR" secondAttribute="baseline" id="4Su-KW-Hk5"/>
+                            <constraint firstItem="qMx-Uu-c9x" firstAttribute="top" secondItem="huU-Zu-tqa" secondAttribute="bottom" constant="8" id="IPd-ZT-V6W"/>
                             <constraint firstItem="huU-Zu-tqa" firstAttribute="trailing" secondItem="mYD-hd-T9z" secondAttribute="trailing" id="JNj-Wa-kny"/>
+                            <constraint firstItem="qMx-Uu-c9x" firstAttribute="leading" secondItem="QI6-OD-SrR" secondAttribute="trailing" constant="8" symbolic="YES" id="N6G-DG-qsr"/>
                             <constraint firstItem="huU-Zu-tqa" firstAttribute="top" secondItem="mYD-hd-T9z" secondAttribute="bottom" constant="8" symbolic="YES" id="NcR-eB-1g7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mYD-hd-T9z" secondAttribute="trailing" id="Pl8-1e-zNT"/>
                             <constraint firstItem="mYD-hd-T9z" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="4" id="QNS-9r-tAO"/>

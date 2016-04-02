@@ -11,13 +11,15 @@ import Accounts
 
 class UIPickerViewDataSourceAccounts: NSObject, UIPickerViewDataSource {
     
+    var values = [String]()
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         //return self.accounts.count
-        return TwitterConnection.instance.accounts?.count ?? 0
+        return values.count
     }
 
 }

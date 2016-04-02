@@ -19,9 +19,22 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         
     }
     
-    @IBAction func btnRequestAccountInformation(sender: UIButton) {
-        
+    @IBAction func btnRequestAccountFriends(sender: UIButton) {
+        guard let selectAccount = TwitterConnection.instance.selectedAccount
+            , account = TwitterStore.instance.twitterAccounts[selectAccount] else {
+            return
+        }
+        TwitterStore.instance.getTwitterFriends(account)
     }
+
+    @IBAction func btnRequestAccountTimeline(sender: UIButton) {
+        guard let selectAccount = TwitterConnection.instance.selectedAccount
+            , account = TwitterStore.instance.twitterAccounts[selectAccount] else {
+                return
+        }
+        TwitterStore.instance.getTwitterTimeline(account)
+    }
+
     
     //PROPERTIES
     
@@ -77,6 +90,13 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         }
     }
     
+    private func setPkrAccountsDataSource() {
+        self.pkrDataSource.values.removeAll()
+        for (k , _) in TwitterConnection.instance.accounts {
+            self.pkrDataSource.values.append(k)
+        }
+    }
+    
     private func registerEvents() {
         self.observers.append(
             NSNotificationCenter.defaultCenter().addObserverForName(TwitterConnection.Events.Error.rawValue, object: TwitterConnection.instance, queue: nil) { (notification) in
@@ -86,28 +106,45 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         
         self.observers.append(
             NSNotificationCenter.defaultCenter().addObserverForName(TwitterConnection.Events.Granted.rawValue, object: TwitterConnection.instance, queue: nil) { (notification) in
-                
                 print(TwitterConnection.Events.Granted.rawValue)
+                self.setPkrAccountsDataSource()
                 TwitterStore.instance.getTwitterAccounts()
             }
         )
 
         self.observers.append(
             NSNotificationCenter.defaultCenter().addObserverForName(TwitterStore.Events.TwitterAccountRetrieved.rawValue, object: TwitterStore.instance, queue: nil) { (notification) in
+                
                 print(TwitterStore.Events.TwitterAccountRetrieved.rawValue)
                 print(notification.userInfo!["key"])
             }
         )
-
+        
         self.observers.append(
-            NSNotificationCenter.defaultCenter().addObserverForName(TwitterStore.Events.TwitterAccountRefreshed.rawValue, object: TwitterStore.instance, queue: nil) { (notification) in
+            NSNotificationCenter.defaultCenter().addObserverForName(TwitterStore.Events.TwitterAccountFriendRetrieved.rawValue, object: TwitterStore.instance, queue: nil) { (notification) in
                 
-                print(TwitterStore.Events.TwitterAccountRefreshed.rawValue)
+                print(TwitterStore.Events.TwitterAccountFriendRetrieved.rawValue)
                 print(notification.userInfo!["key"])
+                guard let sn = notification.userInfo!["key"] as? String, user = TwitterStore.instance.twitterAccounts[sn] else {
+                    return
+                }
+                print(user.friends ?? "No friends")
             }
-
         )
-
+        
+        self.observers.append(
+            NSNotificationCenter.defaultCenter().addObserverForName(TwitterStore.Events.TwitterAccountTimelineRetrieved.rawValue, object: TwitterStore.instance, queue: nil) { (notification) in
+                
+                print(TwitterStore.Events.TwitterAccountTimelineRetrieved.rawValue)
+                print(notification.userInfo!["key"])
+                print(notification.userInfo!["idTweets"])
+                guard let sn = notification.userInfo!["key"] as? String, user = TwitterStore.instance.twitterAccounts[sn] else {
+                    return
+                }
+                print(user.timeline ?? "No timeline")
+            }
+        )
+        
         self.observers.append(
             NSNotificationCenter.defaultCenter().addObserverForName(TwitterConnection.Events.NotGranted.rawValue, object: TwitterConnection.instance, queue: nil) { (notification) in
             }
@@ -117,8 +154,10 @@ class ViewController: UIViewController, UIPickerViewDelegate {
     //ACTIONS
     
     func donePickerAccounts(sender: UIBarButtonItem) {
-        TwitterConnection.instance.selectedAccountIndex = pkrAccounts.selectedRowInComponent(0)
-        txtAccount.text = TwitterConnection.instance.account?.userFullName
+        if pkrAccounts.numberOfRowsInComponent(0) > 0 {
+            TwitterConnection.instance.selectedAccount = pkrDataSource.values[pkrAccounts.selectedRowInComponent(0)]
+            txtAccount.text = TwitterConnection.instance.account?.userFullName
+        }
         txtAccount.resignFirstResponder()
     }
 
@@ -130,7 +169,7 @@ class ViewController: UIViewController, UIPickerViewDelegate {
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
-        return TwitterConnection.instance.accounts![row].userFullName
+        return pkrDataSource.values[row]
     }
 
 }
