@@ -151,7 +151,6 @@ class TwitterConnection {
 
     private init() {
         twitterAccountType = accountsStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-        print(self.urlCache?.absoluteString)
     }
     
     func requestAccess() {

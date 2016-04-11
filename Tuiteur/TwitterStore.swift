@@ -44,28 +44,72 @@ class TwitterStore {
         load()
     }
     
+    private enum Storage : String {
+        case TwitterAccounts    = "TwitterAccounts"
+        case TwitterUsers       = "TwitterUsers"
+        case TwitterTweets      = "TwitterTweets"
+    }
+    
     private func load() {
-        guard let url = urlStorage?.URLByAppendingPathComponent("twitterAccounts"),  data = NSData(contentsOfURL: url) else {
-            return
+        print("LOADING STORE...")
+        let storages = [Storage.TwitterAccounts, Storage.TwitterUsers, Storage.TwitterTweets]
+        for st in storages {
+            print(st.rawValue)
+            guard let url = urlStorage?.URLByAppendingPathComponent(st.rawValue),  data = NSData(contentsOfURL: url) else {
+                continue
+            }
+            let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
+            switch st {
+            case .TwitterAccounts:
+                guard let data = unarchiver.decodeObject() as? [String: TwitterAccount] else {
+                    return
+                }
+                self.twitterAccounts = data
+            case .TwitterUsers:
+                guard let data = unarchiver.decodeObject() as? [Int: TwitterUser] else {
+                    return
+                }
+                self.twitterUsers = data
+            case .TwitterTweets:
+                guard let data = unarchiver.decodeObject() as? [Int: TwitterTweet] else {
+                    return
+                }
+                self.twitterTweets = data
+            }
         }
-        let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
-        guard let accounts = unarchiver.decodeObject() as? [String: TwitterAccount] else {
-            return
-        }
-        self.twitterAccounts = accounts
+        
     }
     
-    private func save() {
-        guard let url = urlStorage?.URLByAppendingPathComponent("twitterAccounts") else {
-            return
+    private func save(storage: Storage? = nil) {
+        
+        func _save(st: Storage) {
+            guard let url = urlStorage?.URLByAppendingPathComponent(st.rawValue) else {
+                return
+            }
+            let data = NSMutableData()
+            let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+            switch st {
+            case .TwitterAccounts:
+                archiver.encodeObject(self.twitterAccounts)
+            case .TwitterUsers:
+                archiver.encodeObject(self.twitterUsers)
+            case .TwitterTweets:
+                archiver.encodeObject(self.twitterTweets)
+                
+            }
+            archiver.finishEncoding()
+            data.writeToURL(url, atomically: true)
         }
-        let data = NSMutableData()
-        let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-        archiver.encodeObject(self.twitterAccounts)
-        archiver.finishEncoding()
-        data.writeToURL(url, atomically: true)
+        
+        if let st = storage {
+            _save(st)
+        } else {
+            let storages = [Storage.TwitterAccounts, Storage.TwitterUsers, Storage.TwitterTweets]
+            for st in storages {
+                _save(st)
+            }
+        }
     }
-    
     
     func getTwitterTimeline(account: TwitterAccount) {
 //        return [
@@ -92,7 +136,7 @@ class TwitterStore {
             }
             
             var index = 0
-            var idTweets = [Int]()
+            var newTweets = [Int]()
             
             for tweet in tweets {
                 if let tweetObject = tweet as? [String: AnyObject], idtweet = tweet["id"] as? Int {
@@ -103,16 +147,15 @@ class TwitterStore {
                     }
                     if account.timeline.indexOf(idtweet) == nil {
                         account.timeline.insert(idtweet, atIndex: index)
-                        idTweets.append(idtweet)
+                        newTweets.append(idtweet)
                     }
                     index += 1
                 }
             }
+            self.save(Storage.TwitterAccounts)
+            self.save(Storage.TwitterTweets)
             
-            guard account.timeline.count > 0 else {
-                return
-            }
-            NSNotificationCenter.defaultCenter().postNotificationName(Events.TwitterAccountTimelineRetrieved.rawValue, object: self, userInfo: ["key": sn, "idTweets": idTweets])
+            NSNotificationCenter.defaultCenter().postNotificationName(Events.TwitterAccountTimelineRetrieved.rawValue, object: self, userInfo: ["key": sn, "newTweets": newTweets])
         })
     }
     
@@ -162,6 +205,8 @@ class TwitterStore {
                     retrieveFriends()
                     return
                 }
+                self.save(Storage.TwitterAccounts)
+                self.save(Storage.TwitterUsers)
                 NSNotificationCenter.defaultCenter().postNotificationName(Events.TwitterAccountFriendRetrieved.rawValue, object: self, userInfo: ["key": sn])
             }
         }
@@ -217,7 +262,7 @@ class TwitterStore {
                     let ta = TwitterAccount(json: json)
                     self.twitterAccounts[sn] = ta
                 }
-                self.save()
+                self.save(Storage.TwitterAccounts)
                 NSNotificationCenter.defaultCenter().postNotificationName(Events.TwitterAccountRetrieved.rawValue, object: self, userInfo: ["key": sn])
             })
         }

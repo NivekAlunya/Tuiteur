@@ -3,3 +3,6 @@
 //
 
 #import <CommonCrypto/CommonCrypto.h>
+
+#import "FastImageCache.h"
+

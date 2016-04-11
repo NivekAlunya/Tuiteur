@@ -8,24 +8,13 @@
 
 import Foundation
 
-class TwitterTweet {
+class TwitterTweet: TwitterObject {
     
-    private var json: [String: AnyObject]
-    
-    init(json: AnyObject) {
-        self.json = json as! [String: AnyObject]
+    override init(json: AnyObject) {
+        super.init(json: json)
     }
     
-    func update(json: AnyObject) {
-        self.json = json as! [String: AnyObject]
-    }
-    
-    subscript(s: String) -> AnyObject? {
-        get {
-            return json[s]
-        }
-        set(newValue) {
-            json[s] = newValue
-        }
+    @objc required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }

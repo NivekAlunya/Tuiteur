@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D10DC2251CB5BDCD002CEBB4 /* Float - Double - Int +Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10DC2241CB5BDCD002CEBB4 /* Float - Double - Int +Angle.swift */; };
 		D132E5571CAD8F2A00453165 /* TwitterTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D132E5561CAD8F2A00453165 /* TwitterTweet.swift */; };
 		D142EEE11CA4933E007E2900 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D142EEE01CA4933E007E2900 /* AppDelegate.swift */; };
 		D142EEE31CA4933E007E2900 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D142EEE21CA4933E007E2900 /* ViewController.swift */; };
@@ -23,7 +24,34 @@
 		D142EF241CA8037A007E2900 /* TwitterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D142EF231CA8037A007E2900 /* TwitterStore.swift */; };
 		D142EF261CA81524007E2900 /* TwitterAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = D142EF251CA81524007E2900 /* TwitterAccount.swift */; };
 		D142EF291CA82FDE007E2900 /* NSData+Hashes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D142EF281CA82FDE007E2900 /* NSData+Hashes.swift */; };
+		D16485B61CB3E998006EFD78 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16485B51CB3E998006EFD78 /* ImageLoader.swift */; };
+		D16485B81CB41FC2006EFD78 /* ImagePendingOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16485B71CB41FC2006EFD78 /* ImagePendingOperations.swift */; };
+		D16DBA321CB02DA0001DF62E /* TwitterObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16DBA311CB02DA0001DF62E /* TwitterObject.swift */; };
 		D1B298EA1CAB1B69004DA371 /* TwitterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B298E91CAB1B69004DA371 /* TwitterUser.swift */; };
+		D1DC14841CB1B5C900810206 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC14831CB1B5C900810206 /* ImageDownloader.swift */; };
+		D1DC14861CB1B8F900810206 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC14851CB1B8F900810206 /* ImageStore.swift */; };
+		D1DC14881CB1B97800810206 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC14871CB1B97800810206 /* Image.swift */; };
+		D1DC153E1CB322EA00810206 /* FICImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15301CB322EA00810206 /* FICImageCache.m */; };
+		D1DC153F1CB322EA00810206 /* FICImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15301CB322EA00810206 /* FICImageCache.m */; };
+		D1DC15401CB322EA00810206 /* FICImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15301CB322EA00810206 /* FICImageCache.m */; };
+		D1DC15411CB322EA00810206 /* FICImageFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15321CB322EA00810206 /* FICImageFormat.m */; };
+		D1DC15421CB322EA00810206 /* FICImageFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15321CB322EA00810206 /* FICImageFormat.m */; };
+		D1DC15431CB322EA00810206 /* FICImageFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15321CB322EA00810206 /* FICImageFormat.m */; };
+		D1DC15441CB322EA00810206 /* FICImageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15341CB322EA00810206 /* FICImageTable.m */; };
+		D1DC15451CB322EA00810206 /* FICImageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15341CB322EA00810206 /* FICImageTable.m */; };
+		D1DC15461CB322EA00810206 /* FICImageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15341CB322EA00810206 /* FICImageTable.m */; };
+		D1DC15471CB322EA00810206 /* FICImageTableChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15361CB322EA00810206 /* FICImageTableChunk.m */; };
+		D1DC15481CB322EA00810206 /* FICImageTableChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15361CB322EA00810206 /* FICImageTableChunk.m */; };
+		D1DC15491CB322EA00810206 /* FICImageTableChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15361CB322EA00810206 /* FICImageTableChunk.m */; };
+		D1DC154A1CB322EA00810206 /* FICImageTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15381CB322EA00810206 /* FICImageTableEntry.m */; };
+		D1DC154B1CB322EA00810206 /* FICImageTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15381CB322EA00810206 /* FICImageTableEntry.m */; };
+		D1DC154C1CB322EA00810206 /* FICImageTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC15381CB322EA00810206 /* FICImageTableEntry.m */; };
+		D1DC154D1CB322EA00810206 /* FICUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC153B1CB322EA00810206 /* FICUtilities.m */; };
+		D1DC154E1CB322EA00810206 /* FICUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC153B1CB322EA00810206 /* FICUtilities.m */; };
+		D1DC154F1CB322EA00810206 /* FICUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DC153B1CB322EA00810206 /* FICUtilities.m */; };
+		D1DC15501CB322EA00810206 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1DC153D1CB322EA00810206 /* Info.plist */; };
+		D1DC15511CB322EA00810206 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1DC153D1CB322EA00810206 /* Info.plist */; };
+		D1DC15521CB322EA00810206 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1DC153D1CB322EA00810206 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D10DC2241CB5BDCD002CEBB4 /* Float - Double - Int +Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Float - Double - Int +Angle.swift"; sourceTree = "<group>"; };
 		D132E5561CAD8F2A00453165 /* TwitterTweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterTweet.swift; sourceTree = "<group>"; };
 		D142EEDD1CA4933D007E2900 /* Tuiteur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tuiteur.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D142EEE01CA4933E007E2900 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +97,30 @@
 		D142EF231CA8037A007E2900 /* TwitterStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterStore.swift; sourceTree = "<group>"; };
 		D142EF251CA81524007E2900 /* TwitterAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAccount.swift; sourceTree = "<group>"; };
 		D142EF281CA82FDE007E2900 /* NSData+Hashes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+Hashes.swift"; sourceTree = "<group>"; };
+		D16485B51CB3E998006EFD78 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		D16485B71CB41FC2006EFD78 /* ImagePendingOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePendingOperations.swift; sourceTree = "<group>"; };
+		D16DBA311CB02DA0001DF62E /* TwitterObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterObject.swift; sourceTree = "<group>"; };
 		D1B298E91CAB1B69004DA371 /* TwitterUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterUser.swift; sourceTree = "<group>"; };
+		D1DC14831CB1B5C900810206 /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		D1DC14851CB1B8F900810206 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
+		D1DC14871CB1B97800810206 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		D1DC152D1CB322EA00810206 /* FICEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICEntity.h; sourceTree = "<group>"; };
+		D1DC152E1CB322EA00810206 /* FICImageCache+FICErrorLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FICImageCache+FICErrorLogging.h"; sourceTree = "<group>"; };
+		D1DC152F1CB322EA00810206 /* FICImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImageCache.h; sourceTree = "<group>"; };
+		D1DC15301CB322EA00810206 /* FICImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICImageCache.m; sourceTree = "<group>"; };
+		D1DC15311CB322EA00810206 /* FICImageFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImageFormat.h; sourceTree = "<group>"; };
+		D1DC15321CB322EA00810206 /* FICImageFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICImageFormat.m; sourceTree = "<group>"; };
+		D1DC15331CB322EA00810206 /* FICImageTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImageTable.h; sourceTree = "<group>"; };
+		D1DC15341CB322EA00810206 /* FICImageTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICImageTable.m; sourceTree = "<group>"; };
+		D1DC15351CB322EA00810206 /* FICImageTableChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImageTableChunk.h; sourceTree = "<group>"; };
+		D1DC15361CB322EA00810206 /* FICImageTableChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICImageTableChunk.m; sourceTree = "<group>"; };
+		D1DC15371CB322EA00810206 /* FICImageTableEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImageTableEntry.h; sourceTree = "<group>"; };
+		D1DC15381CB322EA00810206 /* FICImageTableEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICImageTableEntry.m; sourceTree = "<group>"; };
+		D1DC15391CB322EA00810206 /* FICImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImports.h; sourceTree = "<group>"; };
+		D1DC153A1CB322EA00810206 /* FICUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICUtilities.h; sourceTree = "<group>"; };
+		D1DC153B1CB322EA00810206 /* FICUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICUtilities.m; sourceTree = "<group>"; };
+		D1DC153C1CB322EA00810206 /* FastImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastImageCache.h; sourceTree = "<group>"; };
+		D1DC153D1CB322EA00810206 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +155,7 @@
 				D142EEF71CA4933E007E2900 /* TuiteurTests */,
 				D142EF021CA4933E007E2900 /* TuiteurUITests */,
 				D142EEDE1CA4933D007E2900 /* Products */,
+				D1DC152B1CB322EA00810206 /* FastImageCache */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +172,7 @@
 		D142EEDF1CA4933E007E2900 /* Tuiteur */ = {
 			isa = PBXGroup;
 			children = (
+				D1DC14821CB1918300810206 /* Image */,
 				D142EF1D1CA715DC007E2900 /* CommonCrypto */,
 				D142EF1A1CA70637007E2900 /* Extension */,
 				D142EF131CA576A2007E2900 /* Views */,
@@ -161,6 +215,7 @@
 				D142EF251CA81524007E2900 /* TwitterAccount.swift */,
 				D1B298E91CAB1B69004DA371 /* TwitterUser.swift */,
 				D132E5561CAD8F2A00453165 /* TwitterTweet.swift */,
+				D16DBA311CB02DA0001DF62E /* TwitterObject.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -187,6 +242,7 @@
 			children = (
 				D142EF1B1CA70653007E2900 /* String+Hashes.swift */,
 				D142EF281CA82FDE007E2900 /* NSData+Hashes.swift */,
+				D10DC2241CB5BDCD002CEBB4 /* Float - Double - Int +Angle.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -197,6 +253,51 @@
 				D142EF1E1CA71700007E2900 /* module.map */,
 			);
 			name = CommonCrypto;
+			sourceTree = "<group>";
+		};
+		D1DC14821CB1918300810206 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				D1DC14831CB1B5C900810206 /* ImageDownloader.swift */,
+				D1DC14851CB1B8F900810206 /* ImageStore.swift */,
+				D1DC14871CB1B97800810206 /* Image.swift */,
+				D16485B51CB3E998006EFD78 /* ImageLoader.swift */,
+				D16485B71CB41FC2006EFD78 /* ImagePendingOperations.swift */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		D1DC152B1CB322EA00810206 /* FastImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				D1DC152C1CB322EA00810206 /* FastImageCache */,
+				D1DC153C1CB322EA00810206 /* FastImageCache.h */,
+				D1DC153D1CB322EA00810206 /* Info.plist */,
+			);
+			name = FastImageCache;
+			path = ../Libraries/FIC/FastImageCache/FastImageCache;
+			sourceTree = "<group>";
+		};
+		D1DC152C1CB322EA00810206 /* FastImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				D1DC152D1CB322EA00810206 /* FICEntity.h */,
+				D1DC152E1CB322EA00810206 /* FICImageCache+FICErrorLogging.h */,
+				D1DC152F1CB322EA00810206 /* FICImageCache.h */,
+				D1DC15301CB322EA00810206 /* FICImageCache.m */,
+				D1DC15311CB322EA00810206 /* FICImageFormat.h */,
+				D1DC15321CB322EA00810206 /* FICImageFormat.m */,
+				D1DC15331CB322EA00810206 /* FICImageTable.h */,
+				D1DC15341CB322EA00810206 /* FICImageTable.m */,
+				D1DC15351CB322EA00810206 /* FICImageTableChunk.h */,
+				D1DC15361CB322EA00810206 /* FICImageTableChunk.m */,
+				D1DC15371CB322EA00810206 /* FICImageTableEntry.h */,
+				D1DC15381CB322EA00810206 /* FICImageTableEntry.m */,
+				D1DC15391CB322EA00810206 /* FICImports.h */,
+				D1DC153A1CB322EA00810206 /* FICUtilities.h */,
+				D1DC153B1CB322EA00810206 /* FICUtilities.m */,
+			);
+			path = FastImageCache;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +369,11 @@
 					D142EEDC1CA4933D007E2900 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 92R2MUGYT2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					D142EEF31CA4933E007E2900 = {
 						CreatedOnToolsVersion = 7.3;
@@ -309,6 +415,7 @@
 				D142EEEE1CA4933E007E2900 /* LaunchScreen.storyboard in Resources */,
 				D142EF171CA5DE0F007E2900 /* API.html in Resources */,
 				D142EEEB1CA4933E007E2900 /* Assets.xcassets in Resources */,
+				D1DC15501CB322EA00810206 /* Info.plist in Resources */,
 				D142EEE61CA4933E007E2900 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +424,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1DC15511CB322EA00810206 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +432,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1DC15521CB322EA00810206 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,14 +445,27 @@
 			files = (
 				D1B298EA1CAB1B69004DA371 /* TwitterUser.swift in Sources */,
 				D142EEE31CA4933E007E2900 /* ViewController.swift in Sources */,
+				D1DC14841CB1B5C900810206 /* ImageDownloader.swift in Sources */,
+				D1DC15441CB322EA00810206 /* FICImageTable.m in Sources */,
+				D1DC153E1CB322EA00810206 /* FICImageCache.m in Sources */,
 				D142EEE11CA4933E007E2900 /* AppDelegate.swift in Sources */,
+				D1DC14881CB1B97800810206 /* Image.swift in Sources */,
 				D142EF191CA600FB007E2900 /* UIPickerViewDataSourceAccounts.swift in Sources */,
+				D1DC14861CB1B8F900810206 /* ImageStore.swift in Sources */,
+				D16DBA321CB02DA0001DF62E /* TwitterObject.swift in Sources */,
 				D142EF291CA82FDE007E2900 /* NSData+Hashes.swift in Sources */,
 				D142EF241CA8037A007E2900 /* TwitterStore.swift in Sources */,
+				D10DC2251CB5BDCD002CEBB4 /* Float - Double - Int +Angle.swift in Sources */,
+				D16485B61CB3E998006EFD78 /* ImageLoader.swift in Sources */,
 				D142EF151CA578C1007E2900 /* TwitterConnection.swift in Sources */,
+				D1DC15471CB322EA00810206 /* FICImageTableChunk.m in Sources */,
 				D142EF1C1CA70653007E2900 /* String+Hashes.swift in Sources */,
+				D16485B81CB41FC2006EFD78 /* ImagePendingOperations.swift in Sources */,
+				D1DC154D1CB322EA00810206 /* FICUtilities.m in Sources */,
 				D142EEE91CA4933E007E2900 /* Tuiteur.xcdatamodeld in Sources */,
+				D1DC15411CB322EA00810206 /* FICImageFormat.m in Sources */,
 				D132E5571CAD8F2A00453165 /* TwitterTweet.swift in Sources */,
+				D1DC154A1CB322EA00810206 /* FICImageTableEntry.m in Sources */,
 				D142EF261CA81524007E2900 /* TwitterAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,7 +474,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1DC154B1CB322EA00810206 /* FICImageTableEntry.m in Sources */,
+				D1DC154E1CB322EA00810206 /* FICUtilities.m in Sources */,
 				D142EEF91CA4933E007E2900 /* TuiteurTests.swift in Sources */,
+				D1DC153F1CB322EA00810206 /* FICImageCache.m in Sources */,
+				D1DC15481CB322EA00810206 /* FICImageTableChunk.m in Sources */,
+				D1DC15421CB322EA00810206 /* FICImageFormat.m in Sources */,
+				D1DC15451CB322EA00810206 /* FICImageTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,7 +488,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1DC154C1CB322EA00810206 /* FICImageTableEntry.m in Sources */,
+				D1DC154F1CB322EA00810206 /* FICUtilities.m in Sources */,
 				D142EF041CA4933E007E2900 /* TuiteurUITests.swift in Sources */,
+				D1DC15401CB322EA00810206 /* FICImageCache.m in Sources */,
+				D1DC15491CB322EA00810206 /* FICImageTableChunk.m in Sources */,
+				D1DC15431CB322EA00810206 /* FICImageFormat.m in Sources */,
+				D1DC15461CB322EA00810206 /* FICImageTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,10 +657,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TuiteurTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rugastelo.TuiteurTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tuiteur/TuiteurTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tuiteur.app/Tuiteur";
 			};
 			name = Debug;
@@ -535,10 +672,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TuiteurTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rugastelo.TuiteurTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tuiteur/TuiteurTests-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tuiteur.app/Tuiteur";
 			};
 			name = Release;
@@ -546,10 +685,13 @@
 		D142EF0F1CA4933E007E2900 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TuiteurUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rugastelo.TuiteurUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tuiteur/TuiteurUITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_TARGET_NAME = Tuiteur;
 			};
 			name = Debug;
@@ -557,10 +699,12 @@
 		D142EF101CA4933E007E2900 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TuiteurUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rugastelo.TuiteurUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tuiteur/TuiteurUITests-Bridging-Header.h";
 				TEST_TARGET_NAME = Tuiteur;
 			};
 			name = Release;

@@ -8,42 +8,40 @@
 
 import Foundation
 
-class TwitterAccount: NSObject, NSCoding {
+class TwitterAccount: TwitterUser {
     
-    private var json: [String: AnyObject]
-    
-    var friends = [Int]()
-
     var timeline = [Int]()
 
-    var tweets = [Int]()
-
-    init(json: AnyObject) {
-        self.json = json as! [String: AnyObject]
+    override init(json: AnyObject) {
+        super.init(json: json)
     }
 
-    @objc func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(json)
+    @objc override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
+        aCoder.encodeObject(friends, forKey: "friends")
+        aCoder.encodeObject(tweets, forKey: "tweets")
+        aCoder.encodeObject(timeline, forKey: "timeline")
     }
     
     @objc required init?(coder aDecoder: NSCoder) {
-        if let obj = aDecoder.decodeObject() as? [String : AnyObject] {
-            self.json = obj
+        super.init(coder: aDecoder)
+
+        if let obj = aDecoder.decodeObjectForKey("friends") as? [Int] {
+            self.friends = obj
         } else {
-            self.json = [String: AnyObject]()
+            self.friends = [Int]()
         }
-    }
-    
-    func update(json: AnyObject) {
-        self.json = json as! [String: AnyObject]
-    }
-    
-    subscript(s: String) -> AnyObject? {
-        get {
-            return json[s]
+        
+        if let obj = aDecoder.decodeObjectForKey("tweets") as? [Int] {
+            self.tweets = obj
+        } else {
+            self.tweets = [Int]()
         }
-        set(newValue) {
-            json[s] = newValue
+        
+        if let obj = aDecoder.decodeObjectForKey("timeline") as? [Int] {
+            self.timeline = obj
+        } else {
+            self.timeline = [Int]()
         }
     }
 }

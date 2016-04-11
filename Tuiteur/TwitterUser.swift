@@ -8,28 +8,31 @@
 
 import Foundation
 
-class TwitterUser {
+class TwitterUser: TwitterObject {
     
-    private var json: [String: AnyObject]
+    var friends = [Int]()
+    
+    var tweets = [Int]()
+    
+    lazy var urlImageProfil: String? = {
+        
+        guard let profil =  self["profile_image_url"] as? String else {
+            return nil
+        }
+        
+        return profil.stringByReplacingOccurrencesOfString("_normal", withString:"")
+    }()
+    
+    override init(json: AnyObject) {
+        super.init(json: json)
+    }
 
-    var friends: [Int]?
-    
-    var tweets: [Int]?
-    
-    init(json: AnyObject) {
-        self.json = json as! [String: AnyObject]
+    @objc override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
     }
     
-    func update(json: AnyObject) {
-        self.json = json as! [String: AnyObject]
+    @objc required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
-    
-    subscript(s: String) -> AnyObject? {
-        get {
-            return json[s]
-        }
-        set(newValue) {
-            json[s] = newValue
-        }
-    }
+
 }

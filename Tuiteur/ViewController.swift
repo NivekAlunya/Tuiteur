@@ -11,12 +11,11 @@ import UIKit
 class ViewController: UIViewController, UIPickerViewDelegate {
 
     //IB THINGS
-    
+    @IBOutlet var imgUser: UIImageView!
     @IBOutlet var txtAccount: UITextField!
     
     @IBAction func btnRequestAccount(sender: UIButton) {
-        TwitterConnection.instance.requestAccess()
-        
+        TwitterStore.instance.getTwitterAccounts()
     }
     
     @IBAction func btnRequestAccountFriends(sender: UIButton) {
@@ -33,6 +32,82 @@ class ViewController: UIViewController, UIPickerViewDelegate {
                 return
         }
         TwitterStore.instance.getTwitterTimeline(account)
+    }
+
+    @IBAction func btnRequestImages(sender: UIButton) {
+        guard let selectAccount = TwitterConnection.instance.selectedAccount
+            , account = TwitterStore.instance.twitterAccounts[selectAccount]
+            else {
+                return
+        }
+        for i in 0 ... 100 {
+            if let user = TwitterStore.instance.twitterUsers[account.friends[i]], profil = user.urlImageProfil {
+                ImageStore.instance.getImage(profil)
+            }
+        }
+    }
+
+    @IBAction func btnStopRequestingImages(sender: UIButton) {
+        ImageStore.instance.abort()
+    }
+    
+    @IBAction func btnBuildImage(sender: UIButton) {
+        guard let identifier = TwitterConnection.instance.selectedAccount
+            , urlImageProfil = TwitterStore.instance.twitterAccounts[identifier]?.urlImageProfil
+             else {
+            return
+        }
+        
+        guard let weburl = NSURL(string: urlImageProfil)
+            , fileinfo = ImageDownloader.instance.getFileURLForWebURL(weburl) else {
+            return
+        }
+        
+//        myImageArea = CGRectMake(xOrigin, yOrigin, myWidth, myHeight);//newImage
+//        mySubimage  = CGImageCreateWithImageInRect(oldImage, myImageArea);
+//        myRect      = CGRectMake(0, 0, myWidth*2, myHeight*2);
+//        CGContextDrawImage(context, myRect, mySubimage);
+        
+        let image = Image(identifier: fileinfo.identifier, weburl: weburl, fileurl: fileinfo.fileurl)
+        image.loadImage()
+        
+        let rect = CGRectMake(0.0, 0.0, imgUser.frame.size.width, imgUser.frame.size.height)
+        
+        let sizeImage = image.img!.size ?? CGSizeZero
+        
+        let ratioW = sizeImage.width / rect.width
+        let ratioH = sizeImage.height / rect.height
+        
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        
+        let radius = CGFloat(rect.width / 2.0)
+        
+        let circle = UIBezierPath(arcCenter: CGPointMake(rect.width / 2, rect.height / 2), radius: radius, startAngle: CGFloat(0.degreesToRadians), endAngle: CGFloat(360.degreesToRadians), clockwise: true)
+
+        circle.lineWidth = CGFloat(1.0)
+
+        circle.addClip()
+        
+        var area = CGRect()
+        
+        let ratio = ratioW > ratioH ? ratioW : ratioH
+        
+        area.size.height = sizeImage.height / ratio
+        area.size.width = sizeImage.width / ratio
+        area.origin.x = (rect.height - area.size.height) / 2
+        area.origin.y = (rect.width - area.size.width) / 2
+        print(area)
+        
+        image.img?.drawInRect(area)
+        
+        let thumb = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        imgUser.image = thumb
+
+        print(imgUser.image?.size)
+        
     }
 
     
@@ -75,6 +150,10 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         self.pkrAccounts.dataSource = self.pkrDataSource
         
         registerEvents();
+        TwitterConnection.instance.requestAccess()
+        
+        print(NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory , inDomains: .UserDomainMask).first?.absoluteString)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -108,7 +187,9 @@ class ViewController: UIViewController, UIPickerViewDelegate {
             NSNotificationCenter.defaultCenter().addObserverForName(TwitterConnection.Events.Granted.rawValue, object: TwitterConnection.instance, queue: nil) { (notification) in
                 print(TwitterConnection.Events.Granted.rawValue)
                 self.setPkrAccountsDataSource()
-                TwitterStore.instance.getTwitterAccounts()
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.selectAccount("RaymondHessel")
+                })
             }
         )
 
@@ -150,13 +231,21 @@ class ViewController: UIViewController, UIPickerViewDelegate {
             }
         )
     }
+    
+    func selectAccount(identifier: String) {
+        TwitterConnection.instance.selectedAccount = identifier
+        txtAccount.text = TwitterConnection.instance.account?.userFullName
+        
+        if let urlImageProfil = TwitterStore.instance.twitterAccounts[identifier]?.urlImageProfil {
+            ImageStore.instance.getImage(urlImageProfil)
+        }
+    }
 
     //ACTIONS
     
     func donePickerAccounts(sender: UIBarButtonItem) {
         if pkrAccounts.numberOfRowsInComponent(0) > 0 {
-            TwitterConnection.instance.selectedAccount = pkrDataSource.values[pkrAccounts.selectedRowInComponent(0)]
-            txtAccount.text = TwitterConnection.instance.account?.userFullName
+            selectAccount(pkrDataSource.values[pkrAccounts.selectedRowInComponent(0)])
         }
         txtAccount.resignFirstResponder()
     }
