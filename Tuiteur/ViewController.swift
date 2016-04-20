@@ -14,9 +14,13 @@ class ViewController: UIViewController, UIPickerViewDelegate {
     @IBOutlet var imgUser: UIImageView!
     @IBOutlet var txtAccount: UITextField!
     
+    @IBOutlet var imgUserTweet: UIImageView!
+    @IBOutlet var txtTweet: UITextView!
     @IBAction func btnRequestAccount(sender: UIButton) {
         TwitterStore.instance.getTwitterAccounts()
     }
+    
+    @IBOutlet var cellHeight: NSLayoutConstraint!
     
     @IBAction func btnRequestAccountFriends(sender: UIButton) {
         guard let selectAccount = TwitterConnection.instance.selectedAccount
@@ -53,7 +57,8 @@ class ViewController: UIViewController, UIPickerViewDelegate {
     
     @IBAction func btnBuildImage(sender: UIButton) {
         guard let identifier = TwitterConnection.instance.selectedAccount
-            , urlImageProfil = TwitterStore.instance.twitterAccounts[identifier]?.urlImageProfil
+            , tu = TwitterStore.instance.twitterAccounts[identifier]
+            , urlImageProfil = tu.urlImageProfil
              else {
             return
         }
@@ -62,16 +67,29 @@ class ViewController: UIViewController, UIPickerViewDelegate {
             , fileinfo = ImageDownloader.instance.getFileURLForWebURL(weburl) else {
             return
         }
-        
-//        myImageArea = CGRectMake(xOrigin, yOrigin, myWidth, myHeight);//newImage
-//        mySubimage  = CGImageCreateWithImageInRect(oldImage, myImageArea);
-//        myRect      = CGRectMake(0, 0, myWidth*2, myHeight*2);
-//        CGContextDrawImage(context, myRect, mySubimage);
-        
+
         let image = Image(identifier: fileinfo.identifier, weburl: weburl, fileurl: fileinfo.fileurl)
+
         image.loadImage()
         
-        let rect = CGRectMake(0.0, 0.0, imgUser.frame.size.width, imgUser.frame.size.height)
+        imgUser.image = getRoundImage(imgUser.frame, image: image)
+        
+        imgUserTweet.image = getRoundImage(imgUserTweet.frame, image: image)
+        
+        print(imgUser.bounds)
+        print(imgUserTweet.bounds)
+        
+        txtTweet.textContainer.exclusionPaths = [UIBezierPath(rect: imgUserTweet.frame)]
+
+        adjustHeight()
+
+    }
+
+    @IBAction func btnBuildTweet(sender: UIButton) {
+        buildTweet()
+    }
+
+    func getRoundImage(rect: CGRect, image: Image) -> UIImage {
         
         let sizeImage = image.img!.size ?? CGSizeZero
         
@@ -80,12 +98,12 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
         
-        let radius = CGFloat(rect.width / 2.0)
+        let radius = CGFloat((rect.width) / 2)
         
         let circle = UIBezierPath(arcCenter: CGPointMake(rect.width / 2, rect.height / 2), radius: radius, startAngle: CGFloat(0.degreesToRadians), endAngle: CGFloat(360.degreesToRadians), clockwise: true)
-
-        circle.lineWidth = CGFloat(1.0)
-
+        
+        print(circle.bounds)
+        
         circle.addClip()
         
         var area = CGRect()
@@ -96,6 +114,7 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         area.size.width = sizeImage.width / ratio
         area.origin.x = (rect.height - area.size.height) / 2
         area.origin.y = (rect.width - area.size.width) / 2
+        
         print(area)
         
         image.img?.drawInRect(area)
@@ -104,12 +123,70 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         
         UIGraphicsEndImageContext()
         
-        imgUser.image = thumb
-
-        print(imgUser.image?.size)
-        
+        return thumb
     }
+    
+    func buildTweet() {
+        
+        guard let selectAccount = TwitterConnection.instance.selectedAccount
+            , account = TwitterStore.instance.twitterAccounts[selectAccount]
+            , screenName = account["screen_name"] as? String else {
+                return
+        }
+        
+        let tweets = TwitterStore.instance.getTweetsWithURL(account)
+        
+        if let tweet = TwitterStore.instance.twitterTweets[tweets[0]], s = tweet["text"] as? String {
+            let ps = NSMutableParagraphStyle()
+            ps.alignment = .Left
+            ps.paragraphSpacing = 2
+            
+            
+            let asUser = NSMutableAttributedString(string: "@\(screenName)\n", attributes: [NSParagraphStyleAttributeName: ps, NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleTitle3)])
+            print(s.characters.count)
+            let asTweet = NSMutableAttributedString(string: s, attributes: [NSParagraphStyleAttributeName: ps, NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody)])
+            getLinksForAttributeString(tweet, attstr: asTweet)
+            asUser.appendAttributedString(asTweet)
+            txtTweet.attributedText = asUser
+        }
+        
+        adjustHeight()
+    }
+    
+    func adjustHeight() {
+        
+        txtTweet.sizeToFit()
+        
+        print(txtTweet.contentSize)
+        
+        cellHeight.constant = CGFloat(16 + txtTweet.contentSize.height + 90)
+    }
+    
+    func getLinksForAttributeString(tweet: TwitterTweet, attstr: NSMutableAttributedString) {
+        guard let urls = tweet["entities"]?["urls"] as? [[String:AnyObject]] else {
+            return
+        }
+        print(urls)
+        for url in urls  {
+            guard let href = url["url"] as? String, indices = url["indices"] as? [Int], nsurl = NSURL(string: href) else {
+                continue
+            }
+            // substring start to indices[0] and read utf16.count
+            // substring indices[Ø] to indices[1] and read utf16.count
+            let startRange =  Range(attstr.string.startIndex..<attstr.string.startIndex.advancedBy(indices[0]))
+            let linkRange =  Range(attstr.string.startIndex.advancedBy(indices[0])..<attstr.string.startIndex.advancedBy(indices[1]))
+            let start  = attstr.string.substringWithRange(startRange)
+            let link  = attstr.string.substringWithRange(linkRange)
+            
+            print(start)
+            print(link)
+            print(start.utf16.count)
+            print(start.utf16.count+link.utf16.count)
+            attstr.addAttribute(NSLinkAttributeName, value: nsurl, range: NSRange(start.utf16.count...(start.utf16.count+link.utf16.count-1)))
+            
+        }
 
+    }
     
     //PROPERTIES
     
@@ -234,7 +311,8 @@ class ViewController: UIViewController, UIPickerViewDelegate {
     
     func selectAccount(identifier: String) {
         TwitterConnection.instance.selectedAccount = identifier
-        txtAccount.text = TwitterConnection.instance.account?.userFullName
+
+        txtAccount.text = TwitterConnection.instance.account?.userFullName ?? TwitterConnection.instance.account?.username
         
         if let urlImageProfil = TwitterStore.instance.twitterAccounts[identifier]?.urlImageProfil {
             ImageStore.instance.getImage(urlImageProfil)
@@ -263,3 +341,16 @@ class ViewController: UIViewController, UIPickerViewDelegate {
 
 }
 
+extension ViewController: UITextViewDelegate {
+    
+    func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+        
+        return false
+    }
+
+    func textView(textView: UITextView, shouldInteractWithTextAttachment textAttachment: NSTextAttachment, inRange characterRange: NSRange) -> Bool {
+        
+        return false
+    }
+
+}

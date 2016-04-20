@@ -64,10 +64,10 @@ class TwitterConnection {
                     "count" : "200"
                     , "since_id" : "0"
                     , "max_id" : "0"
-                    , "trim_user" : "false"
+                    , "trim_user" : "yes"
                     , "exclude_replies": "true"
                     , "contributor_details": "false"
-                    , "include_entities" : "false"
+                    , "include_entities" : "true"
                 ]
             default:
                 return nil
@@ -136,6 +136,7 @@ class TwitterConnection {
             }
             
             account = accounts[un]
+
         }
     }
     
@@ -159,12 +160,15 @@ class TwitterConnection {
                 NSNotificationCenter.defaultCenter().postNotificationName(Events.Error.rawValue, object: self, userInfo: ["Error": err])
                 return
             }
+            print("granted \(granted)")
             if granted {
                 if let accs = self.accountsStore.accountsWithAccountType(self.twitterAccountType) as? [ACAccount] {
                     for acc in accs {
                         self.accounts[acc.username] = acc
                     }
                 }
+                print("Accounts")
+                print(self.accounts)
                 NSNotificationCenter.defaultCenter().postNotificationName(Events.Granted.rawValue, object: self)
             } else {
                 NSNotificationCenter.defaultCenter().postNotificationName(Events.NotGranted.rawValue, object: self)

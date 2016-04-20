@@ -61,4 +61,37 @@ class Image:NSObject,  FICEntity {
             image.drawInRect(CGRect(origin: CGPointZero, size: contextSize))
         }
     }
+    
+    func drawInRect(area: CGRect) -> UIImage? {
+        guard let image = self.img else {
+            return nil
+        }
+        
+        var rect = CGRectZero
+        
+        let ratioW = image.size.width / area.width
+        
+        let ratioH = image.size.height / area.height
+        
+        print("\(ratioW) : \(ratioH)")
+        
+        if ratioW > ratioH  {
+            let height = image.size.height / (ratioW)
+            let offset = (area.height - height) / 2
+            rect = CGRectMake(0, offset, area.width , height)
+        } else {
+            let width = image.size.width  / ratioH
+            let offset = (area.width - width) / 2
+            rect = CGRectMake(offset, 0, width , area.height)
+        }
+
+        image.drawInRect(rect)
+        
+        let thumb = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return thumb
+
+    }
 }

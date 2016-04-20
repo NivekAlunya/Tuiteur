@@ -77,7 +77,18 @@ class TwitterStore {
                 self.twitterTweets = data
             }
         }
-        
+    }
+    
+    func getTweetsWithURL(account: TwitterAccount) -> [Int] {
+        return account.timeline.filter { (key) -> Bool in
+            guard let tweet = self.twitterTweets[key]
+                , entities = tweet["entities"]
+                , urls = entities["urls"] as? [AnyObject] else {
+                return false
+            }
+            
+            return urls.count > 0
+        }
     }
     
     private func save(storage: Storage? = nil) {
