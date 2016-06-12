@@ -13,6 +13,7 @@ class ImageDownloader: NSObject {
     
     enum Events : String {
         case Downloaded = "ImageDownloader.Events.Downloaded"
+        case Cancelled = "ImageDownloader.Events.Cancelled"
         case Error = "ImageDownloader.Events.Error"
     }
     
@@ -20,12 +21,26 @@ class ImageDownloader: NSObject {
     
     lazy private var session: NSURLSession = {
         
-        let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("image_downloader_session_identifier")
         //let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        
+//        let queue = ImageStore.instance.pendings.downloadingQueue
+        let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("image_downloader_session_identifier")
+        configuration.HTTPMaximumConnectionsPerHost = 4
+        let queue: NSOperationQueue? = nil
         return NSURLSession(configuration: configuration, delegate: self, delegateQueue: nil)
     }()
 
+    var queue: NSOperationQueue {
+        get {
+            return session.delegateQueue
+        }
+        set (queue) {
+            self.session.invalidateAndCancel()
+            let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("image_downloader_session_identifier_2")
+            configuration.HTTPMaximumConnectionsPerHost = 4
+            self.session =  NSURLSession(configuration: configuration, delegate: self, delegateQueue: queue)
+        }
+    }
+    
     private let urlStorage: NSURL? = {
         
         let urls = NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory , inDomains: .UserDomainMask)
@@ -43,12 +58,26 @@ class ImageDownloader: NSObject {
         
         return nil
     }()
+    
+    
  
     private override init() {
         super.init()
         _ = self.session
     }
     
+    func clearCache() {
+        guard let directory = urlStorage else {
+            return
+        }
+        do {
+            try NSFileManager.defaultManager().removeItemAtURL(directory)
+            try NSFileManager.defaultManager().createDirectoryAtURL(directory, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            print("Error on purging cache")
+        }
+    }
+
     func download(weburl: NSURL) -> NSURLSessionDownloadTask? {
         
         guard let fileinfo = getFileURLForWebURL(weburl) else {
@@ -98,8 +127,12 @@ extension ImageDownloader: NSURLSessionDownloadDelegate {
             let userinfo = getUserInfoForNotification(weburl, fileurl: fileinfo.fileurl, identifier: fileinfo.identifier)
             do {
                 try NSFileManager.defaultManager().moveItemAtURL(location, toURL: fileinfo.fileurl)
-                print("Post notification")
-                NSNotificationCenter.defaultCenter().postNotificationName(Events.Downloaded.rawValue, object: self, userInfo: userinfo)
+//                print("Post notification File Downloaded")
+                if downloadTask.state == .Canceling {
+                    return
+                } else {
+                    NSNotificationCenter.defaultCenter().postNotificationName(Events.Downloaded.rawValue, object: self, userInfo: userinfo)
+                }
             } catch {
                 print(error)
                 let err = NSError(domain: "", code: 0, userInfo: userinfo)
@@ -113,7 +146,7 @@ extension ImageDownloader: NSURLSessionDownloadDelegate {
             , let completionHandler = appDelegate.backgroundSessionCompletionHandler else {
                 return
         }
-        print("URLSessionDidFinishEventsForBackgroundURLSession")
+//        print("URLSessionDidFinishEventsForBackgroundURLSession")
         appDelegate.backgroundSessionCompletionHandler = nil
         dispatch_async(dispatch_get_main_queue(), {
             completionHandler()

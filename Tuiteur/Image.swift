@@ -8,12 +8,13 @@
 
 import Foundation
 
-class Image:NSObject,  FICEntity {
+class Image:NSObject {
     
     enum State {
         case New, Downloaded, Loaded, Failed
     }
     
+    var processing = false
     let identifier:String
     let weburl:NSURL
     var fileurl:NSURL?
@@ -21,15 +22,17 @@ class Image:NSObject,  FICEntity {
     var UUID: String!
     var sourceImageUUID: String!
     var img: UIImage?
-    
+
     init(identifier: String, weburl: NSURL, fileurl: NSURL?) {
         self.identifier = identifier
         self.weburl = weburl
         
         super.init()
         
-        self.UUID = weburl.absoluteString.md5()
-        self.sourceImageUUID = ""
+        self.UUID = FICStringWithUUIDBytes(FICUUIDBytesFromMD5HashOfString(identifier))
+        
+        self.sourceImageUUID = FICStringWithUUIDBytes(FICUUIDBytesFromMD5HashOfString(weburl.absoluteString))
+        
         self.fileurl = fileurl
     }
     
@@ -41,7 +44,8 @@ class Image:NSObject,  FICEntity {
         let imageData = NSData(contentsOfURL: file)
         
         if imageData?.length > 0 {
-            self.img = UIImage(data: imageData!)
+            //self.img = UIImage(data: imageData!)
+            self.img = UIImage(data: imageData!, scale: CGFloat(Device.scale))
             self.state = .Loaded
             return true
         } else {
@@ -49,49 +53,27 @@ class Image:NSObject,  FICEntity {
         }
         return false
     }
+}
+
+extension Image: FICEntity {
     
     func sourceImageURLWithFormatName(formatName: String!) -> NSURL! {
-        return NSURL()
+        return self.weburl
     }
     
     func drawingBlockForImage(image: UIImage!, withFormatName formatName: String!) -> FICEntityImageDrawingBlock! {
         return {
             context, contextSize in
+
+            var ctxBounds = CGRectZero
+            ctxBounds.size = contextSize
+            CGContextClearRect(context, ctxBounds)
             
-            image.drawInRect(CGRect(origin: CGPointZero, size: contextSize))
+            UIGraphicsPushContext(context);
+            image.drawInRect(ctxBounds)
+            UIGraphicsPopContext();
+            
         }
     }
-    
-    func drawInRect(area: CGRect) -> UIImage? {
-        guard let image = self.img else {
-            return nil
-        }
-        
-        var rect = CGRectZero
-        
-        let ratioW = image.size.width / area.width
-        
-        let ratioH = image.size.height / area.height
-        
-        print("\(ratioW) : \(ratioH)")
-        
-        if ratioW > ratioH  {
-            let height = image.size.height / (ratioW)
-            let offset = (area.height - height) / 2
-            rect = CGRectMake(0, offset, area.width , height)
-        } else {
-            let width = image.size.width  / ratioH
-            let offset = (area.width - width) / 2
-            rect = CGRectMake(offset, 0, width , area.height)
-        }
 
-        image.drawInRect(rect)
-        
-        let thumb = UIGraphicsGetImageFromCurrentImageContext()
-        
-        UIGraphicsEndImageContext()
-        
-        return thumb
-
-    }
 }

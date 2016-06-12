@@ -10,7 +10,7 @@ import Foundation
 
 class TwitterObject: NSObject, NSCoding {
 
-    private var json: [String: AnyObject]
+    /*private */var json: [String: AnyObject]
 
     init(json: AnyObject) {
         self.json = json as! [String: AnyObject]

@@ -14,9 +14,22 @@ class TwitterTweet: TwitterObject {
         super.init(json: json)
     }
     
+    var height = CGFloat(0)
+    
+    var userid: Int? {
+        get {
+            return self["user"]?["id"] as? Int
+        }
+    }
+    
     @objc required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    var attributedString: NSMutableAttributedString?
+    
+    var urlImages = [String]()
+    
 }
 //{
 //    "created_at": "Tue Apr 12 17:27:19 +0000 2016",

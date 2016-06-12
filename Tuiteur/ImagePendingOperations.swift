@@ -13,13 +13,17 @@ class ImagePendingOperations {
     lazy var downloadings = [String: NSURLSessionDownloadTask]()
     lazy var loadings = [String: NSOperation]()
     
+    lazy var downloadingQueue:NSOperationQueue = {
+        var queue = NSOperationQueue()
+        queue.name = "Download queue"
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
+    
     lazy var loadingQueue:NSOperationQueue = {
         var queue = NSOperationQueue()
         queue.name = "Load queue"
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
-    
-    
-    
 }

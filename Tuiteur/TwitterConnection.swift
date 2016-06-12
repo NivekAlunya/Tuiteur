@@ -136,7 +136,6 @@ class TwitterConnection {
             }
             
             account = accounts[un]
-
         }
     }
     

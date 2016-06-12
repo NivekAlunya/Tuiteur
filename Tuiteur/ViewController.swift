@@ -13,9 +13,9 @@ class ViewController: UIViewController, UIPickerViewDelegate {
     //IB THINGS
     @IBOutlet var imgUser: UIImageView!
     @IBOutlet var txtAccount: UITextField!
-    
     @IBOutlet var imgUserTweet: UIImageView!
     @IBOutlet var txtTweet: UITextView!
+    
     @IBAction func btnRequestAccount(sender: UIButton) {
         TwitterStore.instance.getTwitterAccounts()
     }
@@ -54,7 +54,11 @@ class ViewController: UIViewController, UIPickerViewDelegate {
     @IBAction func btnStopRequestingImages(sender: UIButton) {
         ImageStore.instance.abort()
     }
-    
+
+    @IBAction func btnClearCache(sender: UIButton) {
+        ImageDownloader.instance.clearCache()
+    }
+
     @IBAction func btnBuildImage(sender: UIButton) {
         guard let identifier = TwitterConnection.instance.selectedAccount
             , tu = TwitterStore.instance.twitterAccounts[identifier]
@@ -75,14 +79,14 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         imgUser.image = getRoundImage(imgUser.frame, image: image)
         
         imgUserTweet.image = getRoundImage(imgUserTweet.frame, image: image)
-        
         print(imgUser.bounds)
         print(imgUserTweet.bounds)
+        let rect = CGRectMake(imgUserTweet.frame.origin.x, imgUserTweet.frame.origin.y, imgUserTweet.frame.width, imgUserTweet.frame.height - 16.0)
+        txtTweet.contentInset = UIEdgeInsetsMake(-8, -4,-8,-4);
         
-        txtTweet.textContainer.exclusionPaths = [UIBezierPath(rect: imgUserTweet.frame)]
-
+        txtTweet.textContainer.exclusionPaths = [UIBezierPath(rect: rect)]
+        
         adjustHeight()
-
     }
 
     @IBAction func btnBuildTweet(sender: UIButton) {
@@ -103,7 +107,7 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         let circle = UIBezierPath(arcCenter: CGPointMake(rect.width / 2, rect.height / 2), radius: radius, startAngle: CGFloat(0.degreesToRadians), endAngle: CGFloat(360.degreesToRadians), clockwise: true)
         
         print(circle.bounds)
-        
+
         circle.addClip()
         
         var area = CGRect()
@@ -112,8 +116,8 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         
         area.size.height = sizeImage.height / ratio
         area.size.width = sizeImage.width / ratio
-        area.origin.x = (rect.height - area.size.height) / 2
-        area.origin.y = (rect.width - area.size.width) / 2
+        area.origin.y = (rect.height - area.size.height) / 2
+        area.origin.x = (rect.width - area.size.width) / 2
         
         print(area)
         
@@ -173,8 +177,8 @@ class ViewController: UIViewController, UIPickerViewDelegate {
             }
             // substring start to indices[0] and read utf16.count
             // substring indices[Ø] to indices[1] and read utf16.count
-            let startRange =  Range(attstr.string.startIndex..<attstr.string.startIndex.advancedBy(indices[0]))
-            let linkRange =  Range(attstr.string.startIndex.advancedBy(indices[0])..<attstr.string.startIndex.advancedBy(indices[1]))
+            let startRange =  Range(attstr.string.startIndex ..< attstr.string.startIndex.advancedBy(indices[0]))
+            let linkRange =  Range(attstr.string.startIndex.advancedBy(indices[0]) ..< attstr.string.startIndex.advancedBy(indices[1]))
             let start  = attstr.string.substringWithRange(startRange)
             let link  = attstr.string.substringWithRange(linkRange)
             
@@ -183,7 +187,6 @@ class ViewController: UIViewController, UIPickerViewDelegate {
             print(start.utf16.count)
             print(start.utf16.count+link.utf16.count)
             attstr.addAttribute(NSLinkAttributeName, value: nsurl, range: NSRange(start.utf16.count...(start.utf16.count+link.utf16.count-1)))
-            
         }
 
     }
@@ -300,6 +303,7 @@ class ViewController: UIViewController, UIPickerViewDelegate {
                     return
                 }
                 print(user.timeline ?? "No timeline")
+                
             }
         )
         

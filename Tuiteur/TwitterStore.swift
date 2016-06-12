@@ -20,6 +20,19 @@ class TwitterStore {
     var twitterAccounts = [String: TwitterAccount]()
     var twitterUsers = [Int: TwitterUser]()
     var twitterTweets = [Int: TwitterTweet]()
+
+    var twitterUsersByProfil = [String: Int]()
+
+    
+    var selectedAccount: TwitterAccount? {
+        get {
+            guard let selected = TwitterConnection.instance.selectedAccount
+                , ta = TwitterStore.instance.twitterAccounts[selected] else {
+                    return nil
+            }
+            return ta
+        }
+    }
     
     static let instance = TwitterStore()
 
@@ -70,11 +83,18 @@ class TwitterStore {
                     return
                 }
                 self.twitterUsers = data
+                for (k, user) in self.twitterUsers {
+                    if let key = user.urlImageProfil?.md5() {
+                        self.twitterUsersByProfil[key] = k
+                    }
+                }
+                
             case .TwitterTweets:
                 guard let data = unarchiver.decodeObject() as? [Int: TwitterTweet] else {
                     return
                 }
                 self.twitterTweets = data
+                
             }
         }
     }
@@ -154,7 +174,13 @@ class TwitterStore {
                     if let tw = self.twitterTweets[idtweet] {
                         tw.update(tweetObject)
                     } else {
-                        self.twitterTweets[idtweet] = TwitterTweet(json: tweetObject)
+                        let tw = TwitterTweet(json: tweetObject)
+                        if let user = tw["user"], userid = user["id"] as? Int {
+                            if self.twitterUsers[userid] == nil {
+                                self.twitterUsers[userid] = TwitterUser(json: user)
+                            }
+                        }
+                        self.twitterTweets[idtweet] = tw
                     }
                     if account.timeline.indexOf(idtweet) == nil {
                         account.timeline.insert(idtweet, atIndex: index)
@@ -197,7 +223,6 @@ class TwitterStore {
             paramsRetrieveFriends!["user_id"] = ids
             
             TwitterConnection.instance.request(acc, api: apiRetrieveFriends, params: paramsRetrieveFriends, cache: readFromCache) { (json, retrievedFromCache) in
-//                print(json)
                 
                 guard let users = json as? [AnyObject] else {
                     return
@@ -210,14 +235,26 @@ class TwitterStore {
                         } else {
                             self.twitterUsers[iduser] = TwitterUser(json: userObject)
                         }
+                        if let key = self.twitterUsers[iduser]?.urlImageProfil?.md5() {
+                            self.twitterUsersByProfil[key] = iduser
+                        }
                     }
                 }
                 if friends.count > 0 && !retrievedFromCache {
                     retrieveFriends()
                     return
                 }
+                
+                account.friends = account.friends.sort({ (a, b) -> Bool in
+                    guard let usera = self.twitterUsers[a]?["screen_name"] as? String, userb = self.twitterUsers[b]?["screen_name"]  as? String else {
+                        return true
+                    }
+                    
+                    return usera.lowercaseString < userb.lowercaseString
+                })
                 self.save(Storage.TwitterAccounts)
                 self.save(Storage.TwitterUsers)
+
                 NSNotificationCenter.defaultCenter().postNotificationName(Events.TwitterAccountFriendRetrieved.rawValue, object: self, userInfo: ["key": sn])
             }
         }
