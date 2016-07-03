@@ -61,7 +61,7 @@ class TwitterConnection {
                 ]
             case .Statuses_HomeTimeline:
                 return [
-                    "count" : "200"
+                    "count" : "300"
                     , "since_id" : "0"
                     , "max_id" : "0"
                     , "trim_user" : "yes"
@@ -139,18 +139,18 @@ class TwitterConnection {
         }
     }
     
-    
-    private let urlcomponents: NSURLComponents =  {
-        let uc = NSURLComponents()
-        uc.scheme = "https"
-        uc.host = "api.twitter.com"
-        return uc
-    }()
 
     var accounts = [String: ACAccount]()
 
     private init() {
         twitterAccountType = accountsStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+    }
+    private func getUrlcomponents(path: String) -> NSURLComponents {
+        let uc = NSURLComponents()
+        uc.scheme = "https"
+        uc.host = "api.twitter.com"
+        uc.path = path
+        return uc
     }
     
     func requestAccess() {
@@ -166,8 +166,8 @@ class TwitterConnection {
                         self.accounts[acc.username] = acc
                     }
                 }
-                print("Accounts")
-                print(self.accounts)
+                print("Accounts: \(self.accounts)")
+
                 NSNotificationCenter.defaultCenter().postNotificationName(Events.Granted.rawValue, object: self)
             } else {
                 NSNotificationCenter.defaultCenter().postNotificationName(Events.NotGranted.rawValue, object: self)
@@ -201,15 +201,16 @@ class TwitterConnection {
         let hashRequest = computeHashForRequest(account, api: api, params: params)
         
         let path = hashRequest + ".json"
-
-
-        urlcomponents.path = "/1.1/" + api.rawValue + ".json"
         
+        let urlcomponents = getUrlcomponents("/1.1/" + api.rawValue + ".json")
+
         let req = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: api.getMethod(), URL: urlcomponents.URL, parameters: params)
 
         req.account = account
 
         req.performRequestWithHandler { (data, response, error) in
+            print(urlcomponents.path)
+            print(params)
             
             if let err = error {
                 NSNotificationCenter.defaultCenter().postNotificationName(Events.Error.rawValue, object: self, userInfo: ["Error": err])
@@ -218,6 +219,8 @@ class TwitterConnection {
             
             if response.statusCode != 429 && response.statusCode != 200 {
                 let err = NSError(domain: "", code: 2, userInfo: ["code" : response.statusCode, "error": "Error requesting twitter api"])
+                print(response.statusCode)
+                print(response.allHeaderFields)
                 NSNotificationCenter.defaultCenter().postNotificationName(Events.Error.rawValue, object: self, userInfo: ["Error": err])
                 
                 return

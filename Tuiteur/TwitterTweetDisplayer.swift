@@ -10,43 +10,52 @@ import Foundation
 
 class TwitterTweetDisplayer {
     
-    static let tv = UITextView()
-    static let width = CGFloat(300)
-    static let imageHeight = CGFloat(64.0)
+    static let width = CGFloat(290)
+    static let imageHeight = CGFloat(48.0)
     
+    static let textLayout = NSLayoutManager()
+    static let textStorage = NSTextStorage()
+    static var textContainer = NSTextContainer()
+    static var initialized = false
+    static func initTextObject() {
+        textContainer = NSTextContainer(size: CGSizeMake(width, CGFloat.max))
+        textLayout.addTextContainer(textContainer)
+        textStorage.addLayoutManager(textLayout)
+        initialized = true
+    }
     static func getHeightForCell(tweet: TwitterTweet) -> CGFloat {
+        if !initialized {
+            initTextObject()
+        }
         guard let attributedString = tweet.attributedString else {
             return CGFloat(0)
         }
         
-        tv.frame = CGRectMake(0, 0, width, CGFloat.max)
-        
-        tv.attributedText = attributedString
-        tv.sizeToFit()
-
-        return 6.0 + 48.0 + tv.frame.size.height ?? CGFloat(0)
+        textStorage.setAttributedString(attributedString)
+        print(textLayout.usedRectForTextContainer(textContainer).height)
+        return 12.0 + imageHeight + textLayout.usedRectForTextContainer(textContainer).height + 16 ?? CGFloat(200)
     }
     
     static func getAttributedString(tweet: TwitterTweet) -> NSMutableAttributedString {
         var attributedString: NSMutableAttributedString?
-        let id = tweet["id"]
-        print("-----------------------------------------\nTWEET \(id)\n--------------------------------------")
+
         if let txt = tweet["text"] as? String
         {
-//            print(tweet.json)
-//            print(txt)
+
             let ps = NSMutableParagraphStyle()
             ps.alignment = .Left
             ps.paragraphSpacing = 2
+            let body = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+            let font = txt.characters.count > 50 ? (txt.characters.count > 100 ? body.fontWithSize(body.pointSize - 2.0) : body) : body.fontWithSize(body.pointSize + 2.0)
             
-            attributedString = NSMutableAttributedString(string: txt, attributes: [NSParagraphStyleAttributeName: ps, NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleBody)])
+            attributedString = NSMutableAttributedString(string: txt, attributes: [NSParagraphStyleAttributeName: ps, NSFontAttributeName: font])
             
             buildLinksForAttributeString(tweet, attributedString: attributedString!)
             buildImagesForAttributeString(tweet, attributedString: attributedString!)
             buildUserMentionsForAttributeString(tweet, attributedString: attributedString!)
             buildHashtagsForAttributeString(tweet, attributedString: attributedString!)
             
-            attributedString!.appendAttributedString(NSAttributedString(string: "\n\(id)"))
+            //attributedString!.appendAttributedString(NSAttributedString(string: "\n\(id)"))
         }
         
         return attributedString ?? NSMutableAttributedString(string: "")

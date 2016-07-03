@@ -132,7 +132,7 @@ class ImageStore {
         let exists =  fic.retrieveImageForEntity(image, withFormatName: format.rawValue) { (entity, formatName, img) in
             onRetrieve(img)
         }
-        print(format.rawValue)
+
         if image.state == Image.State.Loaded {
             if !exists {
                 if let size = formats[format.rawValue]?.imageSize, img = drawInRect(image, area: CGRect(origin: CGPointZero, size: size)) {
@@ -174,7 +174,7 @@ class ImageStore {
         let thumb = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
-        print(thumb.size)
+
         return thumb
     }
 }

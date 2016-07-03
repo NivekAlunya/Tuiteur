@@ -17,13 +17,15 @@ class UserTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-//        print("init from nib")
-        //effect.bounds = CGRect(x: 0.0 , y: 0.0, width: contentView.frame.width, height: contentView.frame.height)
-        ///effect.transform = CGAffineTransformMakeRotation(90.0.degreesToRadians)
+
         photo.layer.masksToBounds = true
         photo.layer.cornerRadius = 10.0
         photo.layer.borderWidth = 2.0
-        photo.layer.borderColor = UIColor.blackColor().CGColor
+        photo.layer.borderColor = UIColor.Crayon.eerieblack.getUIColor().CGColor
+        photo.backgroundColor = UIColor.Crayon.white.getUIColor()
+        username.backgroundColor = UIColor.Crayon.eerieblack.getUIColor()
+        username.textColor = UIColor.Crayon.white.getUIColor()
+
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

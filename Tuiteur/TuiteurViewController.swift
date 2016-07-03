@@ -10,10 +10,12 @@ import UIKit
 
 class TuiteurViewController: UIViewController {
 
+    @IBOutlet var edgePanGesture: UIScreenEdgePanGestureRecognizer!
+    @IBOutlet var tvFriendsConstraint: NSLayoutConstraint!
     @IBOutlet var tvFriends: UITableView!
 
     @IBOutlet var cvTweet: UICollectionView!
-    
+    var tweetHeights = [Int : CGFloat]()
     enum Cells: String {
         case TweetCellSimple = "TWEET_CELL_SIMPLE"
         func getNib() -> UINib {
@@ -31,9 +33,14 @@ class TuiteurViewController: UIViewController {
     var accelerating = false
     var velocity = 0.0
     let uirefresh = UIRefreshControl()
+    let uirefresh2 = UIRefreshControl()
     var noInteractionYet = true
+    var noInteractionYetOnTweets = true
     var downloadingsAvatar = [String: NSIndexPath]()
     var downloadingsAvatarForTweet = [String: [NSIndexPath]]()
+    
+    var continueOnTweetId = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,32 +48,47 @@ class TuiteurViewController: UIViewController {
         registerEvents()
         
         cvTweet.registerNib(Cells.TweetCellSimple.getNib(), forCellWithReuseIdentifier: Cells.TweetCellSimple.rawValue)
-        cvTweet.reloadData()
+        requestAccountFriends()
+        
         uirefresh.attributedTitle = NSAttributedString(string: "REFRESH")
         uirefresh.addTarget(self, action: #selector(TuiteurViewController.refresh), forControlEvents: .ValueChanged)
         tvFriends.insertSubview(uirefresh, atIndex: 0)
-        //ImageStore.instance.fic.reset()
-        print(TwitterStore.instance.selectedAccount?.friends.count)
+
+        uirefresh2.attributedTitle = NSAttributedString(string: "REFRESH TWEETS")
+        uirefresh2.addTarget(self, action: #selector(TuiteurViewController.refreshTweet), forControlEvents: .ValueChanged)
+        cvTweet.insertSubview(uirefresh2, atIndex: 0)
+
+
         var counter = 0
         for i in TwitterStore.instance.selectedAccount?.timeline ?? [] {
-            let tweet = TwitterStore.instance.twitterTweets[i]
-            if tweet?.height == 0 {
-                if counter > 20 {
-                    break
-                }
-                TwitterStore.instance.twitterTweets[i]?.attributedString = TwitterTweetDisplayer.getAttributedString(tweet!)
-                let height = TwitterTweetDisplayer.getHeightForCell(tweet!)
-                TwitterStore.instance.twitterTweets[i]?.height = height
-                print("HEIGHT => \(TwitterStore.instance.twitterTweets[i]?.height ?? 0)")
-                
-                counter += 1
+            if self.tweetHeights[i] != nil {
+                continue
             }
+            if counter > 20 {
+                self.tweetHeights[i] = 160
+            }
+            if let tweet = TwitterStore.instance.twitterTweets[i] {
+                TwitterStore.instance.twitterTweets[i]?.attributedString = TwitterTweetDisplayer.getAttributedString(tweet)
+                self.tweetHeights[i] = TwitterTweetDisplayer.getHeightForCell(tweet)
+            }
+            counter += 1
         }
         let layout = PaperLayout()
         cvTweet.collectionViewLayout = layout
         
 //        cvTweet.collectionViewLayout.invalidateLayout()
-        cvTweet.reloadData()
+        requestAccountTimeline()
+        edgePanGesture.addTarget(self, action: #selector(TuiteurViewController.screenEdgePanGesture(_:)))
+    }
+    
+    func screenEdgePanGesture(recognizer: UIScreenEdgePanGestureRecognizer ) {
+        if tvFriendsConstraint.constant < 0 {
+            UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseIn, animations: { 
+                self.tvFriendsConstraint.constant = 0
+                }, completion: { (completed) in
+                    
+            })
+        }
     }
     
     func refresh() {
@@ -78,7 +100,12 @@ class TuiteurViewController: UIViewController {
 //            self.uirefresh.endRefreshing()
 //        }
     }
-    
+
+    func refreshTweet() {
+        requestAccountTimeline(TwitterStore.Cursor.Next)
+        
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -118,9 +145,9 @@ class TuiteurViewController: UIViewController {
                 }
                 
                 if let index = self.downloadingsAvatar[image.identifier] {
-                    self.downloadingsAvatar.removeValueForKey(image.identifier)
                     ImageStore.instance.getUIImage(image, format: ImageStore.FastImageFormat.UserAvatar, onRetrieve: { (uiimage) in
                         dispatch_async(dispatch_get_main_queue()) {
+                            self.downloadingsAvatar.removeValueForKey(image.identifier)
                             if let cell = self.tvFriends.cellForRowAtIndexPath(index) as? UserTableViewCell {
                                 cell.photo.image = uiimage
                                 cell.activity.stopAnimating()
@@ -131,9 +158,9 @@ class TuiteurViewController: UIViewController {
                 }
                 
                 ImageStore.instance.getUIImage(image, format: ImageStore.FastImageFormat.TweetAvatar, onRetrieve: { (uiimage) in
-                    if let indexes = self.downloadingsAvatarForTweet[image.identifier] {
-                        for index in indexes {
-                            dispatch_async(dispatch_get_main_queue()) {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let indexes = self.downloadingsAvatarForTweet[image.identifier] {
+                            for index in indexes {
                                 if let tc = self.cvTweet.cellForItemAtIndexPath(index) as? TweetCellSimple {
                                     tc.setImageProfil(uiimage)
                                     //tc.adjustHeight()
@@ -158,8 +185,52 @@ class TuiteurViewController: UIViewController {
                 }
             }
         )
+
+        self.observers.append(
+            NSNotificationCenter.defaultCenter().addObserverForName(TwitterStore.Events.TwitterAccountTimelineRetrieved.rawValue, object: TwitterStore.instance, queue: nil) { (notification) in
+                guard let sn = notification.userInfo!["key"] as? String
+                    , user = TwitterStore.instance.twitterAccounts[sn]
+                    , newTweets = notification.userInfo!["newTweets"] as? [Int]
+                    , max_id = notification.userInfo!["continueOnTweetId"] as? Int
+                    , insertAt = notification.userInfo!["insertAt"] as? Int else {
+                    return
+                }
+                print(newTweets)
+                self.continueOnTweetId = max_id
+                if newTweets.count > 0 {
+                    var indexes = [NSIndexPath]()
+                    var index = insertAt
+                    for i in newTweets {
+                        if let tweet = TwitterStore.instance.twitterTweets[i] {
+                            TwitterStore.instance.twitterTweets[i]?.attributedString = TwitterTweetDisplayer.getAttributedString(tweet)
+                            self.tweetHeights[i] = TwitterTweetDisplayer.getHeightForCell(tweet)
+                            indexes.append(NSIndexPath(forItem: index, inSection: 0))
+                            index += 1
+                        }
+                    }
+                    if TwitterStore.instance.selectedAccount == user{
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.refreshTweets(indexes)
+                        })
+                    }
+                } else {
+                    self.uirefresh2.endRefreshing()
+                }
+            }
+        )
+
     }
     
+    private func refreshTweets(indexes: [NSIndexPath]? = nil) {
+        self.uirefresh2.endRefreshing()
+        noInteractionYetOnTweets = true
+        if let indexes = indexes {
+            self.cvTweet.insertItemsAtIndexPaths(indexes)
+        } else {
+            self.cvTweet.reloadData()
+        }
+    }
+
     private func refreshFriends() {
         self.uirefresh.endRefreshing()
         self.tvFriends.reloadData()
@@ -180,6 +251,14 @@ class TuiteurViewController: UIViewController {
         TwitterStore.instance.getTwitterFriends(account)
     }
     
+    func requestAccountTimeline(cursor: TwitterStore.Cursor = .Start, intervalIndex: Int = 0) {
+        guard let selectAccount = TwitterConnection.instance.selectedAccount
+            , account = TwitterStore.instance.twitterAccounts[selectAccount] else {
+                return
+        }
+        TwitterStore.instance.getTwitterTimeline(account, cursor: cursor, atFragment: 0)
+    }
+
     private func loadImagesForVisibleCells() {
         if let visibleCells = self.tvFriends.indexPathsForVisibleRows {
             var visibleKeys = [String: (NSIndexPath, String)]()
@@ -197,7 +276,7 @@ class TuiteurViewController: UIViewController {
                 
                 downloadings.forEach({ (key) in
                     if !setVisibleKeys.contains(key) {
-                        if let k = TwitterStore.instance.twitterUsersByProfil[key], user = TwitterStore.instance.twitterUsers[k] {
+                        if let k = TwitterStore.instance.twitterUsersByImageProfil[key], user = TwitterStore.instance.twitterUsers[k] {
                             print("canceling " + (user["screen_name"] as? String ?? "..."))
                         }
                         ImageStore.instance.abort(key)
@@ -211,7 +290,7 @@ class TuiteurViewController: UIViewController {
                 
                 setToDownload.forEach({ (key) in
                     if let (index, profil) = visibleKeys[key] {
-                        if let k = TwitterStore.instance.twitterUsersByProfil[profil.md5()], user = TwitterStore.instance.twitterUsers[k] {
+                        if let k = TwitterStore.instance.twitterUsersByImageProfil[profil.md5()], user = TwitterStore.instance.twitterUsers[k] {
                             print("downloading " + (user["screen_name"] as? String ?? "..."))
                         }
                         getImageProfilForCell(profil, indexPath: index)
@@ -247,20 +326,13 @@ extension TuiteurViewController: UITableViewDataSource {
         if let friends = TwitterStore.instance.selectedAccount?.friends {
             if let user = TwitterStore.instance.twitterUsers[friends[indexPath.item]], profil = user.urlImageProfil, username = user["screen_name"] as? String {
 
-                cell.photo.backgroundColor = user.profile_background_color
-                cell.username.backgroundColor = user.profile_background_color
-                cell.photo.layer.borderColor = user.profile_sidebar_border_color?.CGColor
-//                cell.effect.backgroundColor = user.profile_background_color
-//                cell.effect.alpha = 0.75
-                cell.username.textColor = user.profile_text_color
-                
                 cell.username.text = username
                 if tableView.decelerating || tableView.dragging || noInteractionYet {
                     cell.activity.startAnimating()
                     getImageProfilForCell(profil, indexPath: indexPath)
                 } else {
                     cell.activity.stopAnimating()
-                    print("skip \(username).....................    ")
+                    print("skip cell for \(username).....................    ")
                 }
 
             }
@@ -325,16 +397,17 @@ extension TuiteurViewController: UITableViewDataSource {
 //    optional public func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath)
     
 }
-
-extension TuiteurViewController: UITableViewDelegate {
-    
+extension TuiteurViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDecelerating(scrollView: UIScrollView) {
         ImageStore.instance.resume()
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+//        print(scrollView.contentOffset.y)
         down = scrollView.contentOffset.y > lastY ? true : false
         lastY = scrollView.contentOffset.y
+        
+        
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -342,7 +415,16 @@ extension TuiteurViewController: UITableViewDelegate {
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        noInteractionYet = false
+        switch scrollView {
+        case tvFriends:
+            noInteractionYet = false
+            
+        case cvTweet:
+            noInteractionYetOnTweets = false
+            
+        default:
+            break
+        }
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -354,11 +436,15 @@ extension TuiteurViewController: UITableViewDelegate {
     }
     
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        print(velocity)
+//        print(velocity)
         self.velocity = Double(velocity.y)
         accelerating = self.velocity != 0 ? true : false
-        print(accelerating)
+//        print(accelerating)
     }
+
+}
+
+extension TuiteurViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let t = CGAffineTransformMakeRotation((45 * (down ? 1 : -1)).degreesToRadians)
@@ -399,17 +485,23 @@ extension TuiteurViewController: UICollectionViewDataSource {
         let id = account.timeline[indexPath.item]
         //let id = 740328080456056832
         if let tweet = TwitterStore.instance.twitterTweets[id], user = TwitterStore.instance.twitterUsers[tweet.userid!] {
-            if collectionView.decelerating || collectionView.dragging || noInteractionYet {
+            if collectionView.decelerating || collectionView.dragging || noInteractionYetOnTweets {
                 var tintColor: UIColor
                 getImageProfilForTweetCell(user.urlImageProfil!, indexPath: indexPath)
 
-                cell.setText(user["name"] as? String ?? "?", screenName: user["screen_name"] as? String ?? "?", date: tweet["created_at"] as? String ?? "" ,  text: tweet.attributedString ?? emptyAS, user: user)
+                cell.setText(user["name"] as? String ?? "?", screenName: user["screen_name"] as? String ?? "?", date: tweet["created_at"] as? String ?? "" ,  text: tweet.attributedString ?? emptyAS, user: user, account: account)
                 if let color = user.profile_background_color?.approach(UIColor.whiteColor(), withTolerance: 0.2) {
                     tintColor = color.barely ? color.suggestColor : (user.profile_background_color ?? UIColor.blackColor())
                 } else {
                     tintColor = UIColor.blackColor()
                 }
-                cell.setCellTintColor(tintColor)
+                cell.setCellTintColor(tintColor, user: user)
+                
+                if id == continueOnTweetId {
+                    print(id)
+                    requestAccountTimeline(TwitterStore.Cursor.Previous)
+                }
+                
             }
         }
         
@@ -417,24 +509,26 @@ extension TuiteurViewController: UICollectionViewDataSource {
     }
 
     func getImageProfilForTweetCell(profil: String, indexPath: NSIndexPath) {
-        if let image = ImageStore.instance.getImage(profil) {
-            if image.state == Image.State.Loaded {
-                ImageStore.instance.getUIImage(image, format: ImageStore.FastImageFormat.TweetAvatar, onRetrieve: { (uiimage) in
-                    dispatch_async(dispatch_get_main_queue(), {
-                        if let tc = self.cvTweet.cellForItemAtIndexPath(indexPath) as? TweetCellSimple {
-                            tc.setImageProfil(uiimage)
-                        }
-                    })
+
+        if let image = ImageStore.instance.getImage(profil) where image.state == Image.State.Loaded {
+            ImageStore.instance.getUIImage(image, format: ImageStore.FastImageFormat.TweetAvatar, onRetrieve: { (uiimage) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    if let tc = self.cvTweet.cellForItemAtIndexPath(indexPath) as? TweetCellSimple {
+                        tc.setImageProfil(uiimage)
+                    }
                 })
+            })
+            return
+        } else {
+            //Add to the item to process when image will be fully retrieved
+            let identifier = profil.md5()
+            if downloadingsAvatarForTweet[identifier] == nil {
+                downloadingsAvatarForTweet[identifier] = [NSIndexPath]()
             }
-        }
-        let identifier = profil.md5()
-        if downloadingsAvatarForTweet[identifier] == nil {
-            downloadingsAvatarForTweet[identifier] = [NSIndexPath]()
-        }
-        if  let indexes = downloadingsAvatarForTweet[identifier] {
-            if !indexes.contains(indexPath) {
-                downloadingsAvatarForTweet[identifier]?.append(indexPath)
+            if  let indexes = downloadingsAvatarForTweet[identifier] {
+                if !indexes.contains(indexPath) {
+                    downloadingsAvatarForTweet[identifier]?.append(indexPath)
+                }
             }
         }
     }
@@ -450,10 +544,11 @@ extension TuiteurViewController: UICollectionViewDataSource {
 //    optional public func collectionView(collectionView: UICollectionView, canMoveItemAtIndexPath indexPath: NSIndexPath) -> Bool
 //    @available(iOS 9.0, *)
 //    optional public func collectionView(collectionView: UICollectionView, moveItemAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath)
-
 }
 
 extension TuiteurViewController: PaperLayoutDelegate {
+    
+
     func collectionView(collectionView: UICollectionView, layout: UICollectionViewLayout, itemInsetsForSectionAtIndex: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(20, 10, 30, 10)
     }
@@ -466,12 +561,11 @@ extension TuiteurViewController: PaperLayoutDelegate {
         
         let id = account.timeline[indexPath.item]
         //let id = 740328080456056832
-        if let tweet = TwitterStore.instance.twitterTweets[id] {
-            return CGSizeMake(defaultSize.width, tweet.height)
+        if let height = tweetHeights[id] {
+            return CGSizeMake(defaultSize.width, height)
+            
         }
-        
         return defaultSize
-        
     }
 
 }

@@ -13,6 +13,14 @@
 		D131CAA91D0A10F100F6248D /* PaperLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D131CAA61D0A10F100F6248D /* PaperLayout.swift */; };
 		D131CAAA1D0A10F100F6248D /* PaperLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D131CAA71D0A10F100F6248D /* PaperLayoutDelegate.swift */; };
 		D131CAAB1D0A10F100F6248D /* PaperLayoutSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D131CAA81D0A10F100F6248D /* PaperLayoutSection.swift */; };
+		D131CAAD1D0E0E9C00F6248D /* TweetCell1PhotoPortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = D131CAAC1D0E0E9C00F6248D /* TweetCell1PhotoPortrait.xib */; };
+		D131CAAF1D10B4EA00F6248D /* TweetCell1PhotoLandscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = D131CAAE1D10B4EA00F6248D /* TweetCell1PhotoLandscape.xib */; };
+		D131CAB11D10B8C900F6248D /* TweetCell2PhotoLandscapePortrait.xib in Resources */ = {isa = PBXBuildFile; fileRef = D131CAB01D10B8C900F6248D /* TweetCell2PhotoLandscapePortrait.xib */; };
+		D131CAB31D10BCEF00F6248D /* TweetCell1PhotoPortrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = D131CAB21D10BCEF00F6248D /* TweetCell1PhotoPortrait.swift */; };
+		D131CAB51D10BD0D00F6248D /* TweetCell1PhotoLandscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D131CAB41D10BD0D00F6248D /* TweetCell1PhotoLandscape.swift */; };
+		D131CAB71D10BF0500F6248D /* TweetCellMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = D131CAB61D10BF0500F6248D /* TweetCellMedia.swift */; };
+		D131CAB91D10BF1900F6248D /* TweetCellMedia.xib in Resources */ = {isa = PBXBuildFile; fileRef = D131CAB81D10BF1900F6248D /* TweetCellMedia.xib */; };
+		D131CABB1D148E7B00F6248D /* UIColor+Crayon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D131CABA1D148E7B00F6248D /* UIColor+Crayon.swift */; };
 		D132E5571CAD8F2A00453165 /* TwitterTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D132E5561CAD8F2A00453165 /* TwitterTweet.swift */; };
 		D13A27B61CEE0EBE00CD85EC /* TuiteurViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13A27B51CEE0EBE00CD85EC /* TuiteurViewController.swift */; };
 		D13A27B81CEE111500CD85EC /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13A27B71CEE111500CD85EC /* UserTableViewCell.swift */; };
@@ -88,6 +96,14 @@
 		D131CAA61D0A10F100F6248D /* PaperLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperLayout.swift; sourceTree = "<group>"; };
 		D131CAA71D0A10F100F6248D /* PaperLayoutDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperLayoutDelegate.swift; sourceTree = "<group>"; };
 		D131CAA81D0A10F100F6248D /* PaperLayoutSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperLayoutSection.swift; sourceTree = "<group>"; };
+		D131CAAC1D0E0E9C00F6248D /* TweetCell1PhotoPortrait.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell1PhotoPortrait.xib; sourceTree = "<group>"; };
+		D131CAAE1D10B4EA00F6248D /* TweetCell1PhotoLandscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell1PhotoLandscape.xib; sourceTree = "<group>"; };
+		D131CAB01D10B8C900F6248D /* TweetCell2PhotoLandscapePortrait.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell2PhotoLandscapePortrait.xib; sourceTree = "<group>"; };
+		D131CAB21D10BCEF00F6248D /* TweetCell1PhotoPortrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell1PhotoPortrait.swift; sourceTree = "<group>"; };
+		D131CAB41D10BD0D00F6248D /* TweetCell1PhotoLandscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell1PhotoLandscape.swift; sourceTree = "<group>"; };
+		D131CAB61D10BF0500F6248D /* TweetCellMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCellMedia.swift; sourceTree = "<group>"; };
+		D131CAB81D10BF1900F6248D /* TweetCellMedia.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCellMedia.xib; sourceTree = "<group>"; };
+		D131CABA1D148E7B00F6248D /* UIColor+Crayon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Crayon.swift"; sourceTree = "<group>"; };
 		D132E5561CAD8F2A00453165 /* TwitterTweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterTweet.swift; sourceTree = "<group>"; };
 		D13A27B51CEE0EBE00CD85EC /* TuiteurViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuiteurViewController.swift; sourceTree = "<group>"; };
 		D13A27B71CEE111500CD85EC /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
@@ -174,6 +190,13 @@
 			children = (
 				D12C78B41CFF7E5F00A28813 /* TweetCellSimple.xib */,
 				D12C78B61CFF894400A28813 /* TweetCellSimple.swift */,
+				D131CAAC1D0E0E9C00F6248D /* TweetCell1PhotoPortrait.xib */,
+				D131CAAE1D10B4EA00F6248D /* TweetCell1PhotoLandscape.xib */,
+				D131CAB01D10B8C900F6248D /* TweetCell2PhotoLandscapePortrait.xib */,
+				D131CAB21D10BCEF00F6248D /* TweetCell1PhotoPortrait.swift */,
+				D131CAB41D10BD0D00F6248D /* TweetCell1PhotoLandscape.swift */,
+				D131CAB81D10BF1900F6248D /* TweetCellMedia.xib */,
+				D131CAB61D10BF0500F6248D /* TweetCellMedia.swift */,
 			);
 			name = TweetCell;
 			sourceTree = "<group>";
@@ -274,9 +297,9 @@
 			isa = PBXGroup;
 			children = (
 				D131CAA51D0A10AF00F6248D /* Layouts */,
+				D12C78B31CFF7DD500A28813 /* TweetCell */,
 				D142EEE41CA4933E007E2900 /* Main.storyboard */,
 				D142EEEC1CA4933E007E2900 /* LaunchScreen.storyboard */,
-				D12C78B31CFF7DD500A28813 /* TweetCell */,
 				D142EEE21CA4933E007E2900 /* ViewController.swift */,
 				D13A27B51CEE0EBE00CD85EC /* TuiteurViewController.swift */,
 				D13A27B71CEE111500CD85EC /* UserTableViewCell.swift */,
@@ -291,6 +314,7 @@
 				D142EF281CA82FDE007E2900 /* NSData+Hashes.swift */,
 				D10DC2241CB5BDCD002CEBB4 /* Float - Double - Int +Angle.swift */,
 				D13A27B91CEFC9AE00CD85EC /* UIColor+RGB.swift */,
+				D131CABA1D148E7B00F6248D /* UIColor+Crayon.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -471,9 +495,13 @@
 				D142EEEE1CA4933E007E2900 /* LaunchScreen.storyboard in Resources */,
 				D142EF171CA5DE0F007E2900 /* API.html in Resources */,
 				D142EEEB1CA4933E007E2900 /* Assets.xcassets in Resources */,
+				D131CAAD1D0E0E9C00F6248D /* TweetCell1PhotoPortrait.xib in Resources */,
+				D131CAB91D10BF1900F6248D /* TweetCellMedia.xib in Resources */,
 				D1DC15501CB322EA00810206 /* Info.plist in Resources */,
 				D142EEE61CA4933E007E2900 /* Main.storyboard in Resources */,
+				D131CAB11D10B8C900F6248D /* TweetCell2PhotoLandscapePortrait.xib in Resources */,
 				D12C78B51CFF7E5F00A28813 /* TweetCellSimple.xib in Resources */,
+				D131CAAF1D10B4EA00F6248D /* TweetCell1PhotoLandscape.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +535,7 @@
 				D13A27B81CEE111500CD85EC /* UserTableViewCell.swift in Sources */,
 				D131CAAA1D0A10F100F6248D /* PaperLayoutDelegate.swift in Sources */,
 				D1DC153E1CB322EA00810206 /* FICImageCache.m in Sources */,
+				D131CAB31D10BCEF00F6248D /* TweetCell1PhotoPortrait.swift in Sources */,
 				D142EEE11CA4933E007E2900 /* AppDelegate.swift in Sources */,
 				D131CAA91D0A10F100F6248D /* PaperLayout.swift in Sources */,
 				D1DC14881CB1B97800810206 /* Image.swift in Sources */,
@@ -515,15 +544,18 @@
 				D16DBA321CB02DA0001DF62E /* TwitterObject.swift in Sources */,
 				D142EF291CA82FDE007E2900 /* NSData+Hashes.swift in Sources */,
 				D142EF241CA8037A007E2900 /* TwitterStore.swift in Sources */,
+				D131CAB71D10BF0500F6248D /* TweetCellMedia.swift in Sources */,
 				D10DC2251CB5BDCD002CEBB4 /* Float - Double - Int +Angle.swift in Sources */,
 				D16485B61CB3E998006EFD78 /* ImageLoader.swift in Sources */,
 				D142EF151CA578C1007E2900 /* TwitterConnection.swift in Sources */,
 				D1DC15471CB322EA00810206 /* FICImageTableChunk.m in Sources */,
 				D162EDB71D0779CC00F92F99 /* TwitterTweetDisplayer.swift in Sources */,
+				D131CABB1D148E7B00F6248D /* UIColor+Crayon.swift in Sources */,
 				D142EF1C1CA70653007E2900 /* String+Hashes.swift in Sources */,
 				D13A27B61CEE0EBE00CD85EC /* TuiteurViewController.swift in Sources */,
 				D1AAD1EF1CF3A57E00CB952A /* Device.swift in Sources */,
 				D12C78B71CFF894400A28813 /* TweetCellSimple.swift in Sources */,
+				D131CAB51D10BD0D00F6248D /* TweetCell1PhotoLandscape.swift in Sources */,
 				D16485B81CB41FC2006EFD78 /* ImagePendingOperations.swift in Sources */,
 				D1DC154D1CB322EA00810206 /* FICUtilities.m in Sources */,
 				D142EEE91CA4933E007E2900 /* Tuiteur.xcdatamodeld in Sources */,

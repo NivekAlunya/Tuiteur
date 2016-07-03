@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TWEET_CELL_SIMPLE" id="0z5-pQ-c41" customClass="TweetCellSimple" customModule="Tuiteur" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="337"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="337"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VB-U2-6rh">
+                        <rect key="frame" x="2" y="2" width="296" height="333"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tuc-VI-6zp">
+                                <rect key="frame" x="4" y="4" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="dnT-eN-OzK"/>
+                                    <constraint firstAttribute="height" constant="48" id="j43-xq-zCB"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zla-Ap-Ks1">
+                                <rect key="frame" x="54" y="2" width="242" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ScreenName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4IL-Sj-b6q">
+                                <rect key="frame" x="54" y="22" width="242" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kw8-jP-Ynt">
+                                <rect key="frame" x="54" y="40" width="242" height="15"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fzp-Cb-T8j">
+                                <rect key="frame" x="2" y="54" width="292" height="88"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillproident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="18" name="ArialMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4IL-Sj-b6q" firstAttribute="top" secondItem="zla-Ap-Ks1" secondAttribute="bottom" id="1ZI-2m-dXs"/>
+                            <constraint firstItem="Fzp-Cb-T8j" firstAttribute="leading" secondItem="5VB-U2-6rh" secondAttribute="leading" constant="2" id="L2U-NB-wvy"/>
+                            <constraint firstItem="tuc-VI-6zp" firstAttribute="leading" secondItem="5VB-U2-6rh" secondAttribute="leading" constant="4" id="MpB-4r-upw"/>
+                            <constraint firstAttribute="trailing" secondItem="Fzp-Cb-T8j" secondAttribute="trailing" constant="2" id="QBq-Yb-mUa"/>
+                            <constraint firstItem="Kw8-jP-Ynt" firstAttribute="leading" secondItem="tuc-VI-6zp" secondAttribute="trailing" constant="2" id="SR4-wh-xRO"/>
+                            <constraint firstAttribute="trailing" secondItem="4IL-Sj-b6q" secondAttribute="trailing" id="V5P-Gf-k8Y"/>
+                            <constraint firstItem="zla-Ap-Ks1" firstAttribute="leading" secondItem="tuc-VI-6zp" secondAttribute="trailing" constant="2" id="gVr-gT-tbJ"/>
+                            <constraint firstItem="Fzp-Cb-T8j" firstAttribute="top" secondItem="tuc-VI-6zp" secondAttribute="bottom" constant="2" id="kGV-uh-X24"/>
+                            <constraint firstAttribute="trailing" secondItem="Kw8-jP-Ynt" secondAttribute="trailing" id="kJW-fL-ipL"/>
+                            <constraint firstItem="4IL-Sj-b6q" firstAttribute="leading" secondItem="tuc-VI-6zp" secondAttribute="trailing" constant="2" id="lqc-we-9vx"/>
+                            <constraint firstItem="Kw8-jP-Ynt" firstAttribute="top" secondItem="4IL-Sj-b6q" secondAttribute="bottom" id="nG8-NE-ZTV"/>
+                            <constraint firstItem="zla-Ap-Ks1" firstAttribute="top" secondItem="5VB-U2-6rh" secondAttribute="top" constant="2" id="pyg-Yj-XEV"/>
+                            <constraint firstItem="tuc-VI-6zp" firstAttribute="top" secondItem="5VB-U2-6rh" secondAttribute="top" constant="4" id="tPi-WC-fYr"/>
+                            <constraint firstAttribute="trailing" secondItem="zla-Ap-Ks1" secondAttribute="trailing" id="zyj-eY-J72"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7p6-Eq-ZAg">
+                        <rect key="frame" x="30" y="147" width="240" height="180"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="240" id="9gx-Xi-nCt"/>
+                            <constraint firstAttribute="height" constant="180" id="m6q-Fy-E4L"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="5VB-U2-6rh" secondAttribute="trailing" constant="2" id="4j4-Tj-KrK"/>
+                <constraint firstItem="5VB-U2-6rh" firstAttribute="leading" secondItem="0z5-pQ-c41" secondAttribute="leading" constant="2" id="aEy-o2-9PB"/>
+                <constraint firstAttribute="trailing" secondItem="7p6-Eq-ZAg" secondAttribute="trailing" constant="30" id="dg3-WZ-Axk"/>
+                <constraint firstItem="5VB-U2-6rh" firstAttribute="top" secondItem="0z5-pQ-c41" secondAttribute="top" constant="2" id="f0s-Ox-2mX"/>
+                <constraint firstItem="7p6-Eq-ZAg" firstAttribute="leading" secondItem="0z5-pQ-c41" secondAttribute="leading" constant="30" id="f6c-9E-p0B"/>
+                <constraint firstAttribute="bottom" secondItem="7p6-Eq-ZAg" secondAttribute="bottom" constant="10" id="gQF-EY-VPY"/>
+                <constraint firstItem="7p6-Eq-ZAg" firstAttribute="top" secondItem="Fzp-Cb-T8j" secondAttribute="bottom" constant="3" id="kCs-0G-fJm"/>
+                <constraint firstAttribute="bottom" secondItem="5VB-U2-6rh" secondAttribute="bottom" constant="2" id="xbE-Ev-mxh"/>
+            </constraints>
+            <size key="customSize" width="327" height="354"/>
+            <connections>
+                <outlet property="cellcontainer" destination="5VB-U2-6rh" id="VnZ-NG-xPP"/>
+                <outlet property="iv" destination="tuc-VI-6zp" id="VZP-qB-uiu"/>
+                <outlet property="lblDate" destination="Kw8-jP-Ynt" id="Qsp-d9-vRZ"/>
+                <outlet property="lblName" destination="zla-Ap-Ks1" id="HHa-w6-Dbs"/>
+                <outlet property="lblScreenName" destination="4IL-Sj-b6q" id="LO5-HM-8Iy"/>
+                <outlet property="txtTweet" destination="Fzp-Cb-T8j" id="bQb-Xv-fvF"/>
+            </connections>
+            <point key="canvasLocation" x="198" y="110.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

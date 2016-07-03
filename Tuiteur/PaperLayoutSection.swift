@@ -41,7 +41,7 @@ class PaperLayoutSection: NSObject {
     func addItemOfSize(size: CGSize, forIndex indexItem: Int) {
         
         debug("----Process item \(indexItem)------")
-        print(size)
+
         let margin = CGFloat(8.0)
         let sz = CGSizeMake(size.width, size.height)
         var (ranges, frames) = computeIntervalsCanFitToSize(sz, intervals: self.intervals)

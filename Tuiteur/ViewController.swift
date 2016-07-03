@@ -15,6 +15,7 @@ class ViewController: UIViewController, UIPickerViewDelegate {
     @IBOutlet var txtAccount: UITextField!
     @IBOutlet var imgUserTweet: UIImageView!
     @IBOutlet var txtTweet: UITextView!
+    @IBOutlet var scrollv: UIScrollView!
     
     @IBAction func btnRequestAccount(sender: UIButton) {
         TwitterStore.instance.getTwitterAccounts()
@@ -38,6 +39,23 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         TwitterStore.instance.getTwitterTimeline(account)
     }
 
+    @IBAction func btnRequestAccountTimelineNext(sender: UIButton) {
+        guard let selectAccount = TwitterConnection.instance.selectedAccount
+            , account = TwitterStore.instance.twitterAccounts[selectAccount] else {
+                return
+        }
+        TwitterStore.instance.getTwitterTimeline(account, cursor: TwitterStore.Cursor.Next)
+    }
+
+    @IBAction func btnRequestAccountTimelinePrevious(sender: UIButton) {
+        guard let selectAccount = TwitterConnection.instance.selectedAccount
+            , account = TwitterStore.instance.twitterAccounts[selectAccount] else {
+                return
+        }
+        TwitterStore.instance.getTwitterTimeline(account, cursor: TwitterStore.Cursor.Previous)
+    }
+
+    
     @IBAction func btnRequestImages(sender: UIButton) {
         guard let selectAccount = TwitterConnection.instance.selectedAccount
             , account = TwitterStore.instance.twitterAccounts[selectAccount]
@@ -57,6 +75,10 @@ class ViewController: UIViewController, UIPickerViewDelegate {
 
     @IBAction func btnClearCache(sender: UIButton) {
         ImageDownloader.instance.clearCache()
+    }
+
+    @IBAction func btnClearStore(sender: UIButton) {
+        TwitterStore.instance.clearStorage()
     }
 
     @IBAction func btnBuildImage(sender: UIButton) {
@@ -208,12 +230,17 @@ class ViewController: UIViewController, UIPickerViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        print(self.scrollv.bounds)
+        print(self.scrollv.frame)
+        print(self.scrollv.contentSize)
+//        self.scrollv.contentSize = CGSize(width: self.scrollv.bounds.width, height: 800)
+//        print(self.scrollv.contentSize)
         let tlb = UIToolbar()
         tlb.translucent = true
         tlb.barTintColor = UIColor.blackColor()
         
         tlb.sizeToFit()
+        
         
         let btnDone = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ViewController.donePickerAccounts(_:)))
         
@@ -230,6 +257,7 @@ class ViewController: UIViewController, UIPickerViewDelegate {
         self.pkrAccounts.dataSource = self.pkrDataSource
         
         registerEvents();
+        
         TwitterConnection.instance.requestAccess()
         
         print(NSFileManager.defaultManager().URLsForDirectory(.CachesDirectory , inDomains: .UserDomainMask).first?.absoluteString)
@@ -302,7 +330,7 @@ class ViewController: UIViewController, UIPickerViewDelegate {
                 guard let sn = notification.userInfo!["key"] as? String, user = TwitterStore.instance.twitterAccounts[sn] else {
                     return
                 }
-                print(user.timeline ?? "No timeline")
+//                print(user.timeline ?? "No timeline")
                 
             }
         )

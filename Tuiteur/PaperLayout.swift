@@ -24,7 +24,7 @@ class PaperLayout: UICollectionViewLayout {
     }
 
     override func prepareLayout() {
-        print("preparelayout")
+
         super.prepareLayout()
         
         guard let collectionView = self.collectionView
@@ -42,7 +42,7 @@ class PaperLayout: UICollectionViewLayout {
         for i in 0 ..< numberOfSections {
             height += self.headerHeight
             currentOrigin.y = height
-            print("From section \(i)) position is \(currentOrigin)")
+
             
             let numberOfItems = collectionView.numberOfItemsInSection(i)
             

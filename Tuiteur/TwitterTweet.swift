@@ -14,8 +14,6 @@ class TwitterTweet: TwitterObject {
         super.init(json: json)
     }
     
-    var height = CGFloat(0)
-    
     var userid: Int? {
         get {
             return self["user"]?["id"] as? Int

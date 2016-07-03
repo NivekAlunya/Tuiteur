@@ -71,8 +71,10 @@ class ImageDownloader: NSObject {
             return
         }
         do {
+            print("CLEAR CACHE FILES...")
             try NSFileManager.defaultManager().removeItemAtURL(directory)
             try NSFileManager.defaultManager().createDirectoryAtURL(directory, withIntermediateDirectories: true, attributes: nil)
+            print("END CLEARING CACHE FILES...")
         } catch {
             print("Error on purging cache")
         }
@@ -127,10 +129,10 @@ extension ImageDownloader: NSURLSessionDownloadDelegate {
             let userinfo = getUserInfoForNotification(weburl, fileurl: fileinfo.fileurl, identifier: fileinfo.identifier)
             do {
                 try NSFileManager.defaultManager().moveItemAtURL(location, toURL: fileinfo.fileurl)
-//                print("Post notification File Downloaded")
                 if downloadTask.state == .Canceling {
                     return
                 } else {
+                    print("Post notification File Downloaded")
                     NSNotificationCenter.defaultCenter().postNotificationName(Events.Downloaded.rawValue, object: self, userInfo: userinfo)
                 }
             } catch {
@@ -146,7 +148,7 @@ extension ImageDownloader: NSURLSessionDownloadDelegate {
             , let completionHandler = appDelegate.backgroundSessionCompletionHandler else {
                 return
         }
-//        print("URLSessionDidFinishEventsForBackgroundURLSession")
+
         appDelegate.backgroundSessionCompletionHandler = nil
         dispatch_async(dispatch_get_main_queue(), {
             completionHandler()

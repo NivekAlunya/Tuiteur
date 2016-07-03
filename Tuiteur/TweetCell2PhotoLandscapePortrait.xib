@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TWEET_CELL_SIMPLE" id="MVm-a0-Mt9" customClass="TweetCellSimple" customModule="Tuiteur" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="404"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="404"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3D-CG-fqc">
+                        <rect key="frame" x="2" y="2" width="296" height="400"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VOG-1H-hGj">
+                                <rect key="frame" x="4" y="4" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="lvp-ku-3a4"/>
+                                    <constraint firstAttribute="width" constant="48" id="ql4-1X-48M"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXl-HZ-Mw8">
+                                <rect key="frame" x="54" y="2" width="242" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ScreenName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypW-zf-Xb5">
+                                <rect key="frame" x="54" y="22" width="242" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dc8-sK-awt">
+                                <rect key="frame" x="54" y="40" width="242" height="15"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CC1-3i-j7U">
+                                <rect key="frame" x="2" y="54" width="170" height="160"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillproident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="18" name="ArialMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="15F-SZ-rta">
+                                <rect key="frame" x="174" y="54" width="120" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="Vzw-on-Mv1"/>
+                                    <constraint firstAttribute="height" constant="160" id="mpQ-GW-T0E"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="dc8-sK-awt" secondAttribute="trailing" id="0S4-LH-gQ9"/>
+                            <constraint firstItem="VOG-1H-hGj" firstAttribute="leading" secondItem="u3D-CG-fqc" secondAttribute="leading" constant="4" id="2eh-bG-UGS"/>
+                            <constraint firstAttribute="trailing" secondItem="15F-SZ-rta" secondAttribute="trailing" constant="2" id="7hw-EU-acM"/>
+                            <constraint firstItem="dc8-sK-awt" firstAttribute="top" secondItem="ypW-zf-Xb5" secondAttribute="bottom" id="Fq8-GN-39g"/>
+                            <constraint firstAttribute="trailing" secondItem="QXl-HZ-Mw8" secondAttribute="trailing" id="HPK-AF-ozN"/>
+                            <constraint firstItem="CC1-3i-j7U" firstAttribute="top" secondItem="VOG-1H-hGj" secondAttribute="bottom" constant="2" id="MWB-ke-e8G"/>
+                            <constraint firstItem="VOG-1H-hGj" firstAttribute="top" secondItem="u3D-CG-fqc" secondAttribute="top" constant="4" id="Mnl-hu-i3l"/>
+                            <constraint firstItem="QXl-HZ-Mw8" firstAttribute="top" secondItem="u3D-CG-fqc" secondAttribute="top" constant="2" id="WIN-eW-unT"/>
+                            <constraint firstItem="QXl-HZ-Mw8" firstAttribute="leading" secondItem="VOG-1H-hGj" secondAttribute="trailing" constant="2" id="bby-KA-DEf"/>
+                            <constraint firstItem="dc8-sK-awt" firstAttribute="leading" secondItem="VOG-1H-hGj" secondAttribute="trailing" constant="2" id="bvE-1V-p13"/>
+                            <constraint firstItem="ypW-zf-Xb5" firstAttribute="top" secondItem="QXl-HZ-Mw8" secondAttribute="bottom" id="j2I-h1-h0U"/>
+                            <constraint firstItem="ypW-zf-Xb5" firstAttribute="leading" secondItem="VOG-1H-hGj" secondAttribute="trailing" constant="2" id="mUG-VW-nNo"/>
+                            <constraint firstItem="15F-SZ-rta" firstAttribute="leading" secondItem="CC1-3i-j7U" secondAttribute="trailing" constant="2" id="tc6-Y1-Rzb"/>
+                            <constraint firstItem="15F-SZ-rta" firstAttribute="top" secondItem="CC1-3i-j7U" secondAttribute="top" id="w7a-sv-jxg"/>
+                            <constraint firstItem="CC1-3i-j7U" firstAttribute="leading" secondItem="u3D-CG-fqc" secondAttribute="leading" constant="2" id="wsH-mU-bT4"/>
+                            <constraint firstAttribute="trailing" secondItem="ypW-zf-Xb5" secondAttribute="trailing" id="xa4-HI-8f9"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a60-S5-cKC">
+                        <rect key="frame" x="30" y="218" width="240" height="180"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="180" id="CoS-bn-oYm"/>
+                            <constraint firstAttribute="width" constant="240" id="ipt-Sa-ags"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="a60-S5-cKC" firstAttribute="top" secondItem="CC1-3i-j7U" secondAttribute="bottom" constant="2" id="Bd3-aw-6tK"/>
+                <constraint firstItem="u3D-CG-fqc" firstAttribute="top" secondItem="MVm-a0-Mt9" secondAttribute="top" constant="2" id="GeB-zl-1Mm"/>
+                <constraint firstAttribute="bottom" secondItem="u3D-CG-fqc" secondAttribute="bottom" constant="2" id="HH5-Qk-Jsa"/>
+                <constraint firstItem="a60-S5-cKC" firstAttribute="top" secondItem="15F-SZ-rta" secondAttribute="bottom" constant="2" id="SjM-0w-k6n"/>
+                <constraint firstItem="a60-S5-cKC" firstAttribute="leading" secondItem="MVm-a0-Mt9" secondAttribute="leading" constant="30" id="bJE-uc-NAz"/>
+                <constraint firstItem="u3D-CG-fqc" firstAttribute="leading" secondItem="MVm-a0-Mt9" secondAttribute="leading" constant="2" id="dZg-6G-RoS"/>
+                <constraint firstAttribute="trailing" secondItem="u3D-CG-fqc" secondAttribute="trailing" constant="2" id="u9m-cx-Lxk"/>
+                <constraint firstAttribute="trailing" secondItem="a60-S5-cKC" secondAttribute="trailing" constant="30" id="zgt-zW-erD"/>
+            </constraints>
+            <size key="customSize" width="327" height="421"/>
+            <connections>
+                <outlet property="cellcontainer" destination="u3D-CG-fqc" id="LZx-3Q-OZV"/>
+                <outlet property="iv" destination="VOG-1H-hGj" id="hqb-A4-0BL"/>
+                <outlet property="lblDate" destination="dc8-sK-awt" id="ryJ-Tx-XGn"/>
+                <outlet property="lblName" destination="QXl-HZ-Mw8" id="mGO-aO-rOi"/>
+                <outlet property="lblScreenName" destination="ypW-zf-Xb5" id="oLY-Hx-GJE"/>
+                <outlet property="txtTweet" destination="CC1-3i-j7U" id="nQa-wi-MXs"/>
+            </connections>
+            <point key="canvasLocation" x="198" y="144"/>
+        </collectionViewCell>
+    </objects>
+</document>

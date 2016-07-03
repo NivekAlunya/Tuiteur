@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TWEET_CELL_SIMPLE" id="VZV-va-ofM" customClass="TweetCellSimple" customModule="Tuiteur" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="251"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="251"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xj0-eR-21S">
+                        <rect key="frame" x="2" y="2" width="296" height="249"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wBa-Xh-IMo">
+                                <rect key="frame" x="2" y="2" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="rWI-bp-X0l"/>
+                                    <constraint firstAttribute="width" constant="48" id="xmS-bc-Dmb"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsa-EZ-pns">
+                                <rect key="frame" x="52" y="2" width="244" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ScreenName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulb-ja-hE1">
+                                <rect key="frame" x="52" y="22" width="244" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngS-Qg-EuT">
+                                <rect key="frame" x="52" y="40" width="244" height="15"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5V-Ou-jjd">
+                                <rect key="frame" x="2" y="57" width="172" height="190"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="13" name="ArialMT"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CVv-cq-AaU">
+                                <rect key="frame" x="176" y="72" width="120" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="adJ-PD-pbg"/>
+                                    <constraint firstAttribute="height" constant="160" id="bfE-vo-9Bj"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="CVv-cq-AaU" secondAttribute="trailing" id="14P-F7-Y4y"/>
+                            <constraint firstItem="wBa-Xh-IMo" firstAttribute="top" secondItem="Xj0-eR-21S" secondAttribute="top" constant="2" id="4zk-th-iXX"/>
+                            <constraint firstItem="CVv-cq-AaU" firstAttribute="centerY" secondItem="D5V-Ou-jjd" secondAttribute="centerY" id="5J5-iq-YeO"/>
+                            <constraint firstItem="CVv-cq-AaU" firstAttribute="top" secondItem="D5V-Ou-jjd" secondAttribute="top" id="9Fe-Lo-bwz"/>
+                            <constraint firstItem="CVv-cq-AaU" firstAttribute="leading" secondItem="D5V-Ou-jjd" secondAttribute="trailing" constant="2" id="AKF-Ls-INH"/>
+                            <constraint firstItem="D5V-Ou-jjd" firstAttribute="top" secondItem="ngS-Qg-EuT" secondAttribute="bottom" constant="2" id="Fsg-w3-uQR"/>
+                            <constraint firstAttribute="trailing" secondItem="ngS-Qg-EuT" secondAttribute="trailing" id="GdK-mu-a9g"/>
+                            <constraint firstItem="D5V-Ou-jjd" firstAttribute="leading" secondItem="Xj0-eR-21S" secondAttribute="leading" constant="2" id="IrZ-tf-vwf"/>
+                            <constraint firstAttribute="trailing" secondItem="hsa-EZ-pns" secondAttribute="trailing" id="NeP-fO-hfz"/>
+                            <constraint firstItem="ulb-ja-hE1" firstAttribute="leading" secondItem="wBa-Xh-IMo" secondAttribute="trailing" constant="2" id="XjV-bY-9vt"/>
+                            <constraint firstItem="hsa-EZ-pns" firstAttribute="top" secondItem="Xj0-eR-21S" secondAttribute="top" constant="2" id="aRr-kJ-ZVv"/>
+                            <constraint firstAttribute="bottom" secondItem="D5V-Ou-jjd" secondAttribute="bottom" constant="2" id="dZt-qf-WTd"/>
+                            <constraint firstItem="ulb-ja-hE1" firstAttribute="top" secondItem="hsa-EZ-pns" secondAttribute="bottom" id="fn0-1M-dKB"/>
+                            <constraint firstItem="ngS-Qg-EuT" firstAttribute="leading" secondItem="wBa-Xh-IMo" secondAttribute="trailing" constant="2" id="leg-QW-WQb"/>
+                            <constraint firstAttribute="trailing" secondItem="ulb-ja-hE1" secondAttribute="trailing" id="t5h-NH-dqh"/>
+                            <constraint firstItem="wBa-Xh-IMo" firstAttribute="leading" secondItem="Xj0-eR-21S" secondAttribute="leading" constant="2" id="w3z-GZ-kCK"/>
+                            <constraint firstItem="ngS-Qg-EuT" firstAttribute="top" secondItem="ulb-ja-hE1" secondAttribute="bottom" id="z65-H4-Tqx"/>
+                            <constraint firstItem="hsa-EZ-pns" firstAttribute="leading" secondItem="wBa-Xh-IMo" secondAttribute="trailing" constant="2" id="zaU-Mi-9Hu"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9Fe-Lo-bwz"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="Xj0-eR-21S" firstAttribute="leading" secondItem="VZV-va-ofM" secondAttribute="leading" constant="2" id="31k-Yu-WDH"/>
+                <constraint firstItem="Xj0-eR-21S" firstAttribute="top" secondItem="VZV-va-ofM" secondAttribute="top" constant="2" id="Pwt-j7-mYi"/>
+                <constraint firstAttribute="bottom" secondItem="Xj0-eR-21S" secondAttribute="bottom" id="RmB-cY-wfw"/>
+                <constraint firstAttribute="trailing" secondItem="Xj0-eR-21S" secondAttribute="trailing" constant="2" id="XEu-J6-Og1"/>
+            </constraints>
+            <size key="customSize" width="327" height="268"/>
+            <connections>
+                <outlet property="cellcontainer" destination="Xj0-eR-21S" id="Kp3-Bu-at1"/>
+                <outlet property="iv" destination="wBa-Xh-IMo" id="amK-K9-WUZ"/>
+                <outlet property="lblDate" destination="ngS-Qg-EuT" id="Xnf-Ig-3M1"/>
+                <outlet property="lblName" destination="hsa-EZ-pns" id="5S8-YN-oyK"/>
+                <outlet property="lblScreenName" destination="ulb-ja-hE1" id="oOj-k8-oSL"/>
+                <outlet property="txtTweet" destination="D5V-Ou-jjd" id="TuX-vi-u3f"/>
+            </connections>
+            <point key="canvasLocation" x="198" y="67.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

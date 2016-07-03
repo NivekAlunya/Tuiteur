@@ -25,36 +25,62 @@ class TwitterUser: TwitterObject {
     
     lazy var profile_background_color: UIColor? = {
         
+        return UIColor.Crayon.black.getUIColor()
+        
         guard let color =  self["profile_background_color"] as? String else {
             return UIColor(rgbString:"FFFFFF")
         }
-        
-        return UIColor(rgbString: color)
+        let crayon = UIColor.Crayon.getCrayon(color)
+        return crayon.getUIColor()
+        //return UIColor(rgbString: color)
     }()
 
     lazy var profile_text_color: UIColor? = {
         
-        guard let color =  self["profile_text_color"] as? String
-        , let colorText = UIColor(rgbString: color) else {
-            return UIColor(rgbString:"000000")
-        }
+        var derivedColor = UIColor.Crayon.black
+        
         if let profilColor = self.profile_background_color {
-            
-            let (barely, suggestedColor) = colorText.approach(self.profile_background_color!, withTolerance: 0.25)
-            
-            return barely ? suggestedColor : colorText
-            
-        } else {
-            return colorText
+            let hsba = profilColor.getHSBA()
+            if hsba.brightness < 0.5 {
+                derivedColor = UIColor.Crayon.white
+            }
         }
+
+        return derivedColor.getUIColor()
     }()
 
     lazy var profile_sidebar_border_color: UIColor? = {
         
-        guard let color =  self["profile_sidebar_border_color"] as? String where color != "FFFFFF" else {
+        guard let color = self["profile_sidebar_border_color"] as? String where color != "FFFFFF" else {
             return UIColor(rgbString:"000000")
-        }        
-        return UIColor(rgbString: color)
+        }
+        
+        let crayon = UIColor.Crayon.getCrayon(color)
+
+        return crayon.getUIColor()
+
+    }()
+
+    lazy var profile_sidebar_fill_color: UIColor? = {
+        
+        guard let color =  self["profile_sidebar_fill_color"] as? String where color != "FFFFFF" else {
+            return UIColor(rgbString:"000000")
+        }
+
+        let crayon = UIColor.Crayon.getCrayon(color)
+        
+        return crayon.getUIColor()
+    }()
+    
+    lazy var profile_link_color: UIColor? = {
+        
+        guard let color =  self["profile_link_color"] as? String where color != "FFFFFF" else {
+            return UIColor(rgbString:"000000")
+        }
+
+        let crayon = UIColor.Crayon.getCrayon(color)
+        
+        return crayon.getUIColor()
     }()
 
     override init(json: AnyObject) {
