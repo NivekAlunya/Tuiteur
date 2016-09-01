@@ -116,4 +116,7 @@ class PaperLayout: UICollectionViewLayout {
     private func getHeaderFrameForSection(section: PaperLayoutSection) -> CGRect {
         return CGRectMake(0.0, section.frame.origin.y - headerHeight, section.frame.size.width, headerHeight)
     }
+//    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+//        return true
+//    }
 }

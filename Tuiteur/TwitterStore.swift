@@ -57,12 +57,63 @@ class TwitterStore {
         return nil
     }()
     
-    private let storageList = [Storage.TwitterAccounts, Storage.TwitterUsers, Storage.TwitterTweets]
+    private let storageList = [Storage.TwitterTweets, Storage.TwitterAccounts, Storage.TwitterUsers]
     
     let readFromCache: Bool = false
-
+    
     private init() {
         load()
+        
+        for (_, acc) in self.twitterAccounts {
+
+//            var index = 0
+//            var previous: TwitterTweet?
+//            if acc.timelineFragments.count == 0 {
+//                continue
+//            }
+//            
+//            var max_id = acc.timelineFragments[0]
+//            var timelineFragmentRebuilt = false
+//            for id in acc.timeline {
+//            
+//                if let tweet = self.twitterTweets[id] {
+//                    if previous != nil && !timelineFragmentRebuilt {
+//                        if previous!.date.timeIntervalSince1970 - tweet.date.timeIntervalSince1970 > 3600.0 {
+//                            acc.timelineFragments[0] = previous!["id"]! as! Int
+//                            max_id = acc.timelineFragments[0]
+//                            timelineFragmentRebuilt = true
+//                        }
+//                    }
+//                    previous = tweet
+//                    index += 1
+//                } else {
+//                    //remove tweet in timeline wich has not data associated
+//                    acc.timeline.removeAtIndex(index)
+//                    if !timelineFragmentRebuilt && id > max_id && previous != nil {
+//                        acc.timelineFragments[0] = previous!["id"]! as! Int
+//                        max_id = acc.timelineFragments[0]
+//                        timelineFragmentRebuilt = true
+//                    }
+//                }
+//                
+//            }
+//            if timelineFragmentRebuilt {
+//                print("timelineFragmentRebuilt : \(timelineFragmentRebuilt)")
+//            }
+//            print(index)
+//
+//            acc.timeline.sortInPlace({ (a, b) -> Bool in
+//                return a > b
+//            })
+            if removeOlderTweets(acc) {
+                acc.timelineFragments.removeAll()
+                acc.timelineFragments.append(acc.timeline.last!)
+            }
+            print(acc.timelineFragments)
+            print(acc["screen_name"])
+            print(acc.timeline.count)
+        }
+        
     }
     
     enum Storage : String {
@@ -98,8 +149,8 @@ class TwitterStore {
                     if let key = user.urlImageProfil?.md5() {
                         self.twitterUsersByImageProfil[key] = k
                     }
+                    
                 }
-                
             case .TwitterTweets:
                 guard let data = unarchiver.decodeObject() as? [Int: TwitterTweet] else {
                     return
@@ -139,6 +190,7 @@ class TwitterStore {
     }
     
     private func save(storage: Storage? = nil) {
+        
         func _save(st: Storage) {
             guard let url = urlStorage?.URLByAppendingPathComponent(st.rawValue) else {
                 return
@@ -189,6 +241,21 @@ class TwitterStore {
         }
     }
     
+    func removeOlderTweets(account: TwitterAccount) -> Bool {
+        var hasRemovedValue = false
+        if account.timelineFragments.count > 0 && account.timelineFragments[0] > 0 {
+            let max_id = account.timelineFragments[0]
+            for index in (0..<account.timeline.count).reverse() {
+                if account.timeline[index] < max_id {
+                    let id = account.timeline.removeAtIndex(index)
+                    twitterTweets.removeValueForKey(id)
+                    hasRemovedValue = true
+                }
+            }
+        }
+       return hasRemovedValue
+    }
+    
     
     func getTwitterTimeline(account: TwitterAccount, cursor: Cursor = .Start, atFragment: Int = 0) {
 //        return [
@@ -208,50 +275,76 @@ class TwitterStore {
             , var params = api.getParams() else {
             return
         }
-        
-        params["count"] = "200"
-        params["max_id"] = nil
-        params["since_id"] = nil
-        
-        if account.timelineFragments.count > 0 {
-            if cursor == .Start {
+        let numberOfTweets = 200
+        //let numberOfTweets = 30
+        params["count"] = "\(numberOfTweets)"
 
-            } else {
-                let fragment = account.timelineFragments[atFragment]
-                params["since_id"] = cursor == .Next ? String(fragment.since_id) : nil
-                params["max_id"] = cursor == .Previous ? String(fragment.max_id - 1) : nil
-            }
-        } else {
-            
-        }
-        
+        params["since_id"] = cursor == .Next ? String(account.since_id) : nil
+        params["max_id"] = cursor == .Previous ? String(account.timelineFragments[0] - 1) : nil
+
         TwitterConnection.instance.request(acc, api: api, params: params, cache: readFromCache, completion: { (json, retrievedFromCache) in
-            
+
             guard let tweets = json as? [AnyObject] else {
                 return
             }
-
-            print("\(cursor) :\(account.timelineFragments)")
             
+            if tweets.count == 0 {
+                NSNotificationCenter.defaultCenter().postNotificationName(Events.TwitterAccountTimelineRetrieved.rawValue, object: self, userInfo: ["key": sn, "newTweets": [], "insertAt": 0, "continueOnTweetId": -1])
+                //                let first = account.timelineFragments[0]
+                //                account.timelineFragments.removeAll()
+                //                account.timelineFragments.append(first)
+                //                print(account.timelineFragments)
+                account.timelineFragments.removeAll()
+                return
+            }
 
-            var index = cursor == .Previous && account.timelineFragments.count > 0 ? account.timelineFragments[atFragment].count : 0
+            var insertAt = 0
+            
+            if cursor == .Previous && tweets.count > 0 {
+                if let since_id = tweets[0]["id"] as? Int {
+                    for id in account.timeline {
+                        if id > since_id {
+                            insertAt += 1
+                        }
+                    }
+                }
+            }
+
+            var index = insertAt
             
             var newTweets = [Int]()
-
+            var timelineHasToBeMerged = false
             for tweet in tweets {
                 if let tweetObject = tweet as? [String: AnyObject], idtweet = tweet["id"] as? Int {
                     
                     if let tw = self.twitterTweets[idtweet] {
                         tw.update(tweetObject)
+                        timelineHasToBeMerged = true
                     } else {
                         let tw = TwitterTweet(json: tweetObject)
+                        
                         if let user = tw["user"], userid = user["id"] as? Int {
                             if self.twitterUsers[userid] == nil {
                                 self.twitterUsers[userid] = TwitterUser(json: user)
                             }
                         }
+                        
                         self.twitterTweets[idtweet] = tw
-
+                        
+                        if let retweet = tw["retweeted_status"], retweetId = retweet["id"] as? Int , user = retweet["user"] as? [String: AnyObject], iduser = user["id"] as? Int  {
+                            
+                            if self.twitterTweets[retweetId] == nil {
+                                self.twitterTweets[idtweet] = TwitterTweet(json: retweet)
+                            }
+                            
+                            if self.twitterUsers[iduser] == nil {
+                                self.twitterUsers[iduser] = TwitterUser(json: user)
+                            }
+                        }
+                        
+                        
+                        
+                        timelineHasToBeMerged = false
                     }
 
                     self.twitterTweets[idtweet]?.attributedString = TwitterTweetDisplayer.getAttributedString(self.twitterTweets[idtweet]!)
@@ -260,53 +353,52 @@ class TwitterStore {
                         newTweets.append(idtweet)
                         index += 1
                    }
-                    print("account.timeline.count = \(account.timeline.count)")
                 }
             }
+            print(timelineHasToBeMerged)
             
-            if tweets.count == 0 {
-                NSNotificationCenter.defaultCenter().postNotificationName(Events.TwitterAccountTimelineRetrieved.rawValue, object: self, userInfo: ["key": sn, "newTweets": [], "insertAt": 0, "continueOnTweetId": account.timelineFragments[atFragment].max_id])
-                return
-            }
-            
-            var insertAt = 0
-            
+            //take the second tweet for since_id
+            //so when retrieving updates if it doesn t includes the first tweet
+            //a new timeline fragment will be added at position 0
             if let since_id = tweets[0]["id"] as? Int , max_id = tweets[tweets.count - 1]["id"] as? Int {
-                if account.timelineFragments.count > 0 {
-                    
-                    switch cursor {
-                    case .Previous :
-                        let fragment = account.timelineFragments[atFragment]
-                        insertAt = fragment.count
-                        if account.timelineFragments.count > 1 && account.timelineFragments[1].since_id > max_id {
-                            account.timelineFragments[atFragment] = TwitterAccount.TimelineFragment(since_id: fragment.since_id, max_id: account.timelineFragments[1].max_id, count: fragment.count + newTweets.count + account.timelineFragments[1].count)
-                            account.timelineFragments.removeAtIndex(1)
-                        } else {
-                            account.timelineFragments[atFragment] = TwitterAccount.TimelineFragment(since_id: fragment.since_id, max_id: max_id, count: fragment.count + newTweets.count)
-                        }
-                
-                    case .Next :
-                        account.timelineFragments[0] = TwitterAccount.TimelineFragment(since_id: since_id, max_id: account.timelineFragments[0].max_id, count: account.timelineFragments[0].count + newTweets.count)
-                    case .Start :
-                        print("MERGING FRAGMENT.........")
-                        if account.timelineFragments[0].since_id > max_id {
-                            account.timelineFragments[0] = TwitterAccount.TimelineFragment(since_id: since_id, max_id: account.timelineFragments[0].max_id, count: account.timelineFragments[0].count + newTweets.count)
-                        } else {
-                            let fragment = TwitterAccount.TimelineFragment(since_id: since_id, max_id: max_id, count: newTweets.count)
-                            account.timelineFragments.insert(fragment , atIndex: 0)
+
+                switch cursor {
+                case .Previous :
+                    if !timelineHasToBeMerged {
+                        account.timelineFragments[0] = max_id
+                    } else {
+                        while (account.timelineFragments.count > 0 && account.timelineFragments[0] > max_id) {
+                            account.timelineFragments.removeFirst()
                         }
                     }
                     
-                } else {
-                    let fragment = TwitterAccount.TimelineFragment(since_id: since_id, max_id: max_id, count: newTweets.count)
-                    account.timelineFragments.insert(fragment , atIndex: 0)
+                case .Next :
+                    account.since_id = since_id - 1
+                    if !timelineHasToBeMerged {
+                        account.timelineFragments.insert(max_id, atIndex: 0)
+                    } else {
+                        
+                    }
+                        
+                case .Start :
+                    account.since_id = since_id - 1
+                    if !timelineHasToBeMerged {
+                        account.timelineFragments.insert(max_id, atIndex: 0)
+                    } else {
+                        //account.timelineFragments.removeFirst()
+                    }
                 }
+
             }
-            
-            
+            if account.timelineFragments.count == 0 {
+                account.timelineFragments.append(-1)
+            }
+
+            print(account.timeline.count)
             print(account.timelineFragments)
+            print(account.since_id)
             
-            NSNotificationCenter.defaultCenter().postNotificationName(Events.TwitterAccountTimelineRetrieved.rawValue, object: self, userInfo: ["key": sn, "newTweets": newTweets, "insertAt": insertAt, "continueOnTweetId": account.timelineFragments[atFragment].max_id])
+            NSNotificationCenter.defaultCenter().postNotificationName(Events.TwitterAccountTimelineRetrieved.rawValue, object: self, userInfo: ["key": sn, "newTweets": newTweets, "insertAt": insertAt, "continueOnTweetId": account.timelineFragments[0]])
             
             self.save(Storage.TwitterAccounts)
             self.save(Storage.TwitterTweets)

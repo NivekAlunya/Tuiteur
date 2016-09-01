@@ -66,7 +66,7 @@ class TwitterConnection {
                     , "max_id" : "0"
                     , "trim_user" : "yes"
                     , "exclude_replies": "true"
-                    , "contributor_details": "false"
+                    , "contributor_details": "true"
                     , "include_entities" : "true"
                 ]
             default:

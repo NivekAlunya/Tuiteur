@@ -16,8 +16,11 @@ class TweetCellSimple: UICollectionViewCell {
     @IBOutlet var iv: UIImageView!
     @IBOutlet var cellcontainer: UIView!
     @IBOutlet var backgroundHeader: UIView!
+    
     let secondFor1Day = 3600 * 24
-
+    var imagePropertiesSet = false
+    
+    
     private let formatter: NSDateFormatter = {
         let f = NSDateFormatter()
         f.locale = NSLocale(localeIdentifier: "en_US_POSIX")
@@ -25,11 +28,10 @@ class TweetCellSimple: UICollectionViewCell {
         return f
     }()
     
-    var imagePropertiesSet = false
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
     override func awakeFromNib() {
         //initialize here
         let font = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
@@ -66,8 +68,8 @@ class TweetCellSimple: UICollectionViewCell {
                     lblDate.text = "\(hours) hour\(plural) ago"
                 }
             } else {
-                print(account?.json)
 
+                
                 let dt = localDate //NSDate(timeInterval: offset, sinceDate: localDate)
                 let format = NSDateFormatter()
                 format.locale = NSLocale.currentLocale()

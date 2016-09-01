@@ -9,7 +9,20 @@
 import Foundation
 
 class TwitterTweet: TwitterObject {
+
+    private let formatter: NSDateFormatter = {
+        let f = NSDateFormatter()
+        f.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        f.dateFormat = "EEE MMM dd HH:mm:ss Z yyyy"
+        return f
+    }()
     
+    var date: NSDate {
+        get {
+            return formatter.dateFromString((self["created_at"] as? String)!)!
+        }
+    }
+
     override init(json: AnyObject) {
         super.init(json: json)
     }

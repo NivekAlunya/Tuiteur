@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qEf-dX-jEZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qEf-dX-jEZ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -15,11 +15,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="906"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrC-F1-9JG">
-                                <rect key="frame" x="20" y="24" width="560" height="727"/>
+                                <rect key="frame" x="20" y="24" width="560" height="833"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mYD-hd-T9z">
                                         <rect key="frame" x="20" y="28" width="197" height="34"/>
@@ -326,7 +326,7 @@
                     <tabBarItem key="tabBarItem" title="Test" id="NTU-rv-Lq7"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="800"/>
+                    <size key="freeformSize" width="600" height="906"/>
                     <connections>
                         <outlet property="cellHeight" destination="gv7-1B-fjv" id="oMQ-13-XNv"/>
                         <outlet property="imgUser" destination="PeD-WG-Opv" id="0FW-9o-mXN"/>
@@ -352,11 +352,126 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="09d-2E-J5Z"/>
                         <segue destination="Dte-UM-B1p" kind="relationship" relationship="viewControllers" id="vsP-6N-cYr"/>
+                        <segue destination="yvj-Pe-Eov" kind="relationship" relationship="viewControllers" id="yfc-MH-NI1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vdl-H2-jbO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1075" y="-759"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="kJK-jd-Hzu">
+            <objects>
+                <viewController id="yvj-Pe-Eov" customClass="CellWithImageViewController" customModule="Tuiteur" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ct8-B1-J84"/>
+                        <viewControllerLayoutGuide type="bottom" id="m36-eS-9Ia"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hNc-cK-dkW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="knK-pv-W50">
+                                <rect key="frame" x="174" y="-48" width="252" height="696"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WcJ-T5-scy">
+                                        <rect key="frame" x="6" y="0.0" width="241" height="160"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JoG-Qh-xr7">
+                                                <rect key="frame" x="0.0" y="0.0" width="121" height="160"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="121" id="cpR-K2-P13"/>
+                                                </constraints>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B65-ci-CTi">
+                                                <rect key="frame" x="121" y="0.0" width="120" height="160"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="999" constant="160" id="CSe-KA-t58"/>
+                                                    <constraint firstAttribute="width" priority="999" constant="120" id="siV-r6-oGQ"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="JoG-Qh-xr7" firstAttribute="leading" secondItem="WcJ-T5-scy" secondAttribute="leading" id="CSo-EY-ODG"/>
+                                            <constraint firstItem="JoG-Qh-xr7" firstAttribute="top" secondItem="WcJ-T5-scy" secondAttribute="top" id="Iuz-hg-kCL"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="tAY-Ho-1fe">
+                                        <rect key="frame" x="4" y="164" width="244" height="160"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dLW-Wh-0vf">
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="160"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" priority="999" constant="120" id="fuy-lC-jO9"/>
+                                                    <constraint firstAttribute="height" priority="999" constant="160" identifier="height2" id="r6U-WW-9IB"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sUi-Q1-Ri3">
+                                                <rect key="frame" x="124" y="0.0" width="120" height="160"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="999" constant="160" id="BHc-Kv-p17"/>
+                                                    <constraint firstAttribute="width" priority="999" constant="120" id="c1d-nK-xmV"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D16-WI-gdg">
+                                        <rect key="frame" x="46" y="328" width="160" height="120"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="999" constant="120" id="A1f-Jp-VaQ"/>
+                                            <constraint firstAttribute="width" priority="999" constant="160" id="mTh-Tg-h6n"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hsC-rj-9Qw">
+                                        <rect key="frame" x="46" y="452" width="160" height="120"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="999" constant="120" id="WXd-QI-hb6"/>
+                                            <constraint firstAttribute="width" priority="999" constant="160" id="tLd-Vs-7hc"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bJA-2d-pPG">
+                                        <rect key="frame" x="46" y="576" width="160" height="120"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" priority="999" constant="160" id="Ql1-To-8cV"/>
+                                            <constraint firstAttribute="height" priority="999" constant="120" id="k5L-WZ-s0U"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="252" id="L55-yz-Slo"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="knK-pv-W50" firstAttribute="centerX" secondItem="hNc-cK-dkW" secondAttribute="centerX" id="2jM-mc-jjX"/>
+                            <constraint firstItem="knK-pv-W50" firstAttribute="centerY" secondItem="hNc-cK-dkW" secondAttribute="centerY" id="SUi-0l-qim"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="k1N-Sc-f1j"/>
+                    <connections>
+                        <outlet property="stackPortrait" destination="tAY-Ho-1fe" id="m87-Wh-We4"/>
+                        <outlet property="txtWidth" destination="cpR-K2-P13" id="KeR-Of-Vzo"/>
+                        <outletCollection property="images" destination="B65-ci-CTi" collectionClass="NSMutableArray" id="Nwk-wz-8KW"/>
+                        <outletCollection property="images" destination="dLW-Wh-0vf" collectionClass="NSMutableArray" id="WC0-go-gXl"/>
+                        <outletCollection property="images" destination="D16-WI-gdg" collectionClass="NSMutableArray" id="CQb-fj-zgS"/>
+                        <outletCollection property="images" destination="hsC-rj-9Qw" collectionClass="NSMutableArray" id="4ha-5v-gE8"/>
+                        <outletCollection property="images" destination="bJA-2d-pPG" collectionClass="NSMutableArray" id="5qa-jM-PWS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WXF-4G-Pd6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-377" y="-823"/>
         </scene>
         <!--Tuiteur-->
         <scene sceneID="zHw-hD-lV2">
@@ -469,13 +584,22 @@
                                     <outlet property="delegate" destination="Dte-UM-B1p" id="TlG-6J-oEJ"/>
                                 </connections>
                             </tableView>
+                            <button hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z6L-O6-8M9">
+                                <rect key="frame" x="554" y="271" width="36" height="30"/>
+                                <state key="normal" title="More"/>
+                                <connections>
+                                    <action selector="tabMore:" destination="Dte-UM-B1p" eventType="touchUpInside" id="JQH-G8-fMu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="Z6L-O6-8M9" firstAttribute="trailing" secondItem="2GH-Ln-AhE" secondAttribute="trailing" constant="-10" id="Gp8-mS-RHi"/>
                             <constraint firstItem="2GH-Ln-AhE" firstAttribute="top" secondItem="9Av-lh-Ux1" secondAttribute="bottom" id="HMQ-R6-tiX"/>
                             <constraint firstItem="2GH-Ln-AhE" firstAttribute="leading" secondItem="xKJ-Nb-hnw" secondAttribute="trailing" id="NGO-kP-u9F"/>
                             <constraint firstAttribute="trailing" secondItem="2GH-Ln-AhE" secondAttribute="trailing" id="OYh-X1-av5"/>
+                            <constraint firstItem="Z6L-O6-8M9" firstAttribute="centerY" secondItem="2GH-Ln-AhE" secondAttribute="centerY" id="PrM-6W-ECR"/>
                             <constraint firstItem="gth-YF-mYq" firstAttribute="top" secondItem="2GH-Ln-AhE" secondAttribute="bottom" id="cg0-yy-Z9r"/>
                             <constraint firstItem="xKJ-Nb-hnw" firstAttribute="leading" secondItem="pWr-Ch-aUV" secondAttribute="leading" id="v4Q-oA-VgE">
                                 <variation key="widthClass=compact" constant="-100"/>
@@ -490,6 +614,7 @@
                     <tabBarItem key="tabBarItem" title="Tuiteur" id="izz-71-9OL"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="btnMore" destination="Z6L-O6-8M9" id="o0m-4D-DtD"/>
                         <outlet property="cvTweet" destination="2GH-Ln-AhE" id="n73-yQ-fXU"/>
                         <outlet property="edgePanGesture" destination="dY9-BS-L0e" id="hrk-so-431"/>
                         <outlet property="tvFriends" destination="xKJ-Nb-hnw" id="89l-dg-nhK"/>
@@ -501,7 +626,7 @@
                     <rectEdge key="edges" left="YES"/>
                 </screenEdgePanGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-501" y="22"/>
+            <point key="canvasLocation" x="-641" y="92"/>
         </scene>
     </scenes>
     <resources>

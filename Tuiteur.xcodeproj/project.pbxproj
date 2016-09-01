@@ -44,6 +44,7 @@
 		D16485B61CB3E998006EFD78 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16485B51CB3E998006EFD78 /* ImageLoader.swift */; };
 		D16485B81CB41FC2006EFD78 /* ImagePendingOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16485B71CB41FC2006EFD78 /* ImagePendingOperations.swift */; };
 		D16DBA321CB02DA0001DF62E /* TwitterObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16DBA311CB02DA0001DF62E /* TwitterObject.swift */; };
+		D18ABE341D3EC1F400B26992 /* CellWithImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18ABE331D3EC1F400B26992 /* CellWithImageViewController.swift */; };
 		D1AAD1EF1CF3A57E00CB952A /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AAD1EE1CF3A57E00CB952A /* Device.swift */; };
 		D1B298EA1CAB1B69004DA371 /* TwitterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B298E91CAB1B69004DA371 /* TwitterUser.swift */; };
 		D1DC14841CB1B5C900810206 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC14831CB1B5C900810206 /* ImageDownloader.swift */; };
@@ -136,6 +137,7 @@
 		D16485B51CB3E998006EFD78 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		D16485B71CB41FC2006EFD78 /* ImagePendingOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePendingOperations.swift; sourceTree = "<group>"; };
 		D16DBA311CB02DA0001DF62E /* TwitterObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterObject.swift; sourceTree = "<group>"; };
+		D18ABE331D3EC1F400B26992 /* CellWithImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellWithImageViewController.swift; sourceTree = "<group>"; };
 		D1AAD1EE1CF3A57E00CB952A /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		D1B298E91CAB1B69004DA371 /* TwitterUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterUser.swift; sourceTree = "<group>"; };
 		D1DC14831CB1B5C900810206 /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				D142EEEC1CA4933E007E2900 /* LaunchScreen.storyboard */,
 				D142EEE21CA4933E007E2900 /* ViewController.swift */,
 				D13A27B51CEE0EBE00CD85EC /* TuiteurViewController.swift */,
+				D18ABE331D3EC1F400B26992 /* CellWithImageViewController.swift */,
 				D13A27B71CEE111500CD85EC /* UserTableViewCell.swift */,
 			);
 			name = Views;
@@ -560,6 +563,7 @@
 				D1DC154D1CB322EA00810206 /* FICUtilities.m in Sources */,
 				D142EEE91CA4933E007E2900 /* Tuiteur.xcdatamodeld in Sources */,
 				D13A27BA1CEFC9AE00CD85EC /* UIColor+RGB.swift in Sources */,
+				D18ABE341D3EC1F400B26992 /* CellWithImageViewController.swift in Sources */,
 				D1DC15411CB322EA00810206 /* FICImageFormat.m in Sources */,
 				D132E5571CAD8F2A00453165 /* TwitterTweet.swift in Sources */,
 				D1DC154A1CB322EA00810206 /* FICImageTableEntry.m in Sources */,

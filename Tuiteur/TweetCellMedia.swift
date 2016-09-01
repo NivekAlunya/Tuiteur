@@ -10,6 +10,15 @@ import UIKit
 
 class TweetCellMedia: TweetCellSimple {
 
+    
+    @IBOutlet var imageStacks: [UIStackView]!
+
+    @IBOutlet var images: [UIImageView]!
+    
+    @IBOutlet var heigthConstraints: [NSLayoutConstraint]!
+    
+    @IBOutlet var widthConstraints: [NSLayoutConstraint]!
+    
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

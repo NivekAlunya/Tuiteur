@@ -10,7 +10,7 @@ import Foundation
 
 class TwitterTweetDisplayer {
     
-    static let width = CGFloat(290)
+    static let width = CGFloat(285)
     static let imageHeight = CGFloat(48.0)
     
     static let textLayout = NSLayoutManager()
@@ -23,16 +23,20 @@ class TwitterTweetDisplayer {
         textStorage.addLayoutManager(textLayout)
         initialized = true
     }
+    
     static func getHeightForCell(tweet: TwitterTweet) -> CGFloat {
         if !initialized {
             initTextObject()
         }
+        
         guard let attributedString = tweet.attributedString else {
             return CGFloat(0)
         }
         
         textStorage.setAttributedString(attributedString)
+        
         print(textLayout.usedRectForTextContainer(textContainer).height)
+        
         return 12.0 + imageHeight + textLayout.usedRectForTextContainer(textContainer).height + 16 ?? CGFloat(200)
     }
     
