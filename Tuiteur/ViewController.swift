@@ -295,9 +295,9 @@ class ViewController: UIViewController, UIPickerViewDelegate {
             NSNotificationCenter.defaultCenter().addObserverForName(TwitterConnection.Events.Granted.rawValue, object: TwitterConnection.instance, queue: nil) { (notification) in
                 print(TwitterConnection.Events.Granted.rawValue)
                 self.setPkrAccountsDataSource()
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.selectAccount("RaymondHessel")
-                })
+//                dispatch_async(dispatch_get_main_queue(), {
+//                    self.selectAccount("kevinlaunay")
+//                })
             }
         )
 
